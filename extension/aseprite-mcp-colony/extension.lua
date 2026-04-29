@@ -8,7 +8,7 @@
 -- Topology: Aseprite Lua has a WebSocket client (no server), so the
 -- MCP process hosts the WS server and we are the client.
 
-local EXTENSION_VERSION = "0.1.4"
+local EXTENSION_VERSION = "0.1.5"
 local WS_URL = os.getenv("ASEPRITE_MCP_URL") or "ws://127.0.0.1:12700"
 
 -- Lua 5.2 removed loadstring; Aseprite ships Lua 5.4. Use load() and
@@ -20,6 +20,7 @@ local socket = nil
 local connected = false
 local reconnect_timer = nil
 local manual_disable = false
+local paused = false
 
 
 local function log(msg)
@@ -120,6 +121,13 @@ local function handle_message(message)
   local params = req.params or {}
 
   if method == "execute_lua" then
+    if paused then
+      log("rejecting execute_lua id=" .. tostring(id) .. " (bridge paused)")
+      if socket and connected then
+        socket:sendText(encode_response(id, nil, "bridge paused by user"))
+      end
+      return
+    end
     log("dispatch execute_lua id=" .. tostring(id))
     local result, err = exec_lua(params.code or "", params.filename)
     if err ~= nil then log("exec error: " .. tostring(err)) end
@@ -214,7 +222,23 @@ end
 
 function _G.mcp_bridge_status()
   local state = connected and "connected" or "disconnected"
-  app.alert{ title = "MCP Bridge", text = "Status: " .. state .. "\nURL: " .. WS_URL }
+  local pause_state = paused and "PAUSED" or "active"
+  app.alert{
+    title = "MCP Bridge",
+    text = "Connection: " .. state .. "\nDispatch: " .. pause_state .. "\nURL: " .. WS_URL,
+  }
+end
+
+
+function _G.mcp_bridge_pause()
+  paused = true
+  log("dispatch paused (AI scripts will be rejected)")
+end
+
+
+function _G.mcp_bridge_resume()
+  paused = false
+  log("dispatch resumed")
 end
 
 
@@ -241,6 +265,18 @@ function init(plugin)
     title = "MCP Bridge: Status",
     group = "edit_undo",
     onclick = _G.mcp_bridge_status,
+  }
+  plugin:newCommand{
+    id = "MCPBridgePause",
+    title = "MCP Bridge: Pause AI",
+    group = "edit_undo",
+    onclick = _G.mcp_bridge_pause,
+  }
+  plugin:newCommand{
+    id = "MCPBridgeResume",
+    title = "MCP Bridge: Resume AI",
+    group = "edit_undo",
+    onclick = _G.mcp_bridge_resume,
   }
 
   -- Auto-connect on startup

@@ -40,6 +40,9 @@ class LiveBridge:
         self._loop: asyncio.AbstractEventLoop | None = None
         self._thread: threading.Thread | None = None
         self._ready = threading.Event()
+        # Tracks the mode of the most recent execute_lua_script invocation.
+        # "live", "batch", or None if no script has been run yet.
+        self.last_mode: str | None = None
 
     @property
     def connected(self) -> bool:

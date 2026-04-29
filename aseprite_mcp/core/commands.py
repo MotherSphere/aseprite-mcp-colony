@@ -43,6 +43,7 @@ class AsepriteCommand:
         """
         live = bridge.execute_lua_sync(script_content, filename)
         if live is not None:
+            bridge.last_mode = "live"
             return live
 
         with tempfile.NamedTemporaryFile(suffix='.lua', delete=False, mode='w') as tmp:
@@ -56,6 +57,7 @@ class AsepriteCommand:
             args.extend(["--script", script_path])
 
             success, output = AsepriteCommand.run_command(args)
+            bridge.last_mode = "batch"
             return success, output
         finally:
             os.remove(script_path)
