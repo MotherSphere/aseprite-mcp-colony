@@ -17,17 +17,18 @@ async def create_canvas(width: int, height: int, filename: str = "canvas.aseprit
     if err:
         return err
 
-    safe_path = lua_escape(filename.replace("\\", "/"))
+    abs_filename = os.path.abspath(filename)
+    safe_path = lua_escape(abs_filename.replace("\\", "/"))
     script = f"""
     local spr = Sprite({width}, {height})
     spr:saveAs("{safe_path}")
     return "Canvas created successfully"
     """
-    
+
     success, output = AsepriteCommand.execute_lua_script(script)
-    
+
     if success:
-        return f"Canvas created successfully: {filename}"
+        return f"Canvas created successfully: {abs_filename}"
     else:
         return f"Failed to create canvas: {output}"
 
