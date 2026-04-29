@@ -1,23 +1,14 @@
 {
   "name": "aseprite-mcp-colony",
   "displayName": "Aseprite MCP Colony Bridge",
-  "description": "Live bridge to the aseprite-mcp-colony MCP server: AI tools edit the open editor in real time instead of running headless batch jobs.",
+  "description": "Live bridge to the aseprite-mcp-colony MCP server.",
   "version": "0.1.0",
   "author": {
     "name": "MotherSphere"
   },
   "contributes": {
     "scripts": [
-      {
-        "path": "extension.lua"
-      }
-    ],
-    "menus": [
-      {
-        "id": "aseprite-mcp-colony",
-        "title": "MCP Bridge",
-        "group": "edit_undo"
-      }
+      { "path": "extension.lua" }
     ]
   }
 }

@@ -8,7 +8,12 @@
 -- Topology: Aseprite Lua has a WebSocket client (no server), so the
 -- MCP process hosts the WS server and we are the client.
 
+local EXTENSION_VERSION = "0.1.3"
 local WS_URL = os.getenv("ASEPRITE_MCP_URL") or "ws://127.0.0.1:12700"
+
+-- Lua 5.2 removed loadstring; Aseprite ships Lua 5.4. Use load() and
+-- fall back to loadstring on hypothetical 5.1 hosts.
+local lua_load = load or loadstring
 local RECONNECT_INTERVAL = 5  -- seconds
 
 local socket = nil
@@ -67,7 +72,7 @@ local function exec_lua(code, filename)
   local switched, switch_err = ensure_active_sprite(filename)
   if not switched then return nil, switch_err end
 
-  local chunk, load_err = loadstring(code)
+  local chunk, load_err = lua_load(code, "mcp-bridge-script", "t")
   if not chunk then return nil, "load error: " .. tostring(load_err) end
 
   local outputs = {}
@@ -95,9 +100,12 @@ end
 
 
 local function handle_message(message)
+  -- Aseprite's json.decode returns a userdata that behaves like a table,
+  -- so accept either type as long as a method field is present.
   local ok, req = pcall(json.decode, message)
-  if not ok or type(req) ~= "table" then
-    log("malformed message")
+  if not ok or req == nil or type(req.method) ~= "string" then
+    log("malformed message: " .. tostring(req))
+    log("raw (" .. tostring(#message) .. " bytes): " .. tostring(message):sub(1, 400))
     return
   end
 
@@ -106,9 +114,16 @@ local function handle_message(message)
   local params = req.params or {}
 
   if method == "execute_lua" then
+    log("dispatch execute_lua id=" .. tostring(id))
     local result, err = exec_lua(params.code or "", params.filename)
+    if err ~= nil then log("exec error: " .. tostring(err)) end
     if socket and connected then
-      socket:sendText(encode_response(id, result, err))
+      local payload = encode_response(id, result, err)
+      log("sending response (" .. tostring(#payload) .. " bytes)")
+      local send_ok, send_err = pcall(function() socket:sendText(payload) end)
+      if not send_ok then log("sendText failed: " .. tostring(send_err)) end
+    else
+      log("cannot send response: socket not connected")
     end
     return
   end
@@ -198,7 +213,7 @@ end
 
 
 function init(plugin)
-  log("init: target " .. WS_URL)
+  log("init v" .. EXTENSION_VERSION .. " target=" .. WS_URL)
 
   plugin:newCommand{
     id = "MCPBridgeConnect",

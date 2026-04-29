@@ -25,6 +25,25 @@ Active. Upstream tools intact. Colony-specific additions live alongside in `asep
 | `aseprite-palette-coherence` | Workflow for keeping new art coherent with a reference palette (extract -> apply -> quantize). |
 | `aseprite-bevy-pipeline` | Workflow for shipping Aseprite sprites to a Bevy game with proper atlas JSON. |
 
+## Live mode
+
+Every tool transparently switches between two execution modes:
+
+- **Live**: when an Aseprite editor is open and the bundled extension is connected, every Lua script runs inside that editor. The artist sees changes appear in real time and can iterate alongside the AI.
+- **Batch**: when no editor is connected, scripts run via `aseprite --batch --script` (headless). Same tools, no UI.
+
+The MCP process hosts a WebSocket server on `127.0.0.1:12700` (override with `ASEPRITE_MCP_PORT`). The Aseprite extension under `extension/aseprite-mcp-colony/` is the WebSocket client and auto-reconnects every 5s.
+
+To install the live-mode extension:
+
+```bash
+cp -r extension/aseprite-mcp-colony ~/.config/aseprite/extensions/
+```
+
+Then restart Aseprite. On the first connection it will prompt for permission to open `ws://127.0.0.1:12700`. Accept (and tick "do not ask again" if you prefer). The Aseprite `Edit > MCP Bridge: Status` command shows the current connection state.
+
+Tip: Aseprite caches extension code at startup, so any change to `extension.lua` requires a full Aseprite restart.
+
 ## Requirements
 
 - Aseprite (any install: Steam, AUR, source). Set `ASEPRITE_PATH` if not on `PATH`.

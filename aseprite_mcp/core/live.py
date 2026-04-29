@@ -90,10 +90,10 @@ class LiveBridge:
         peer = getattr(websocket, "remote_address", "unknown")
         logger.info("aseprite extension connected from %s", peer)
         try:
-            async for _msg in websocket:
-                pass
-        except ConnectionClosed:
-            pass
+            # Hold the connection open without consuming messages here:
+            # _call reads responses directly. wait_closed() returns when
+            # the peer closes the socket.
+            await websocket.wait_closed()
         finally:
             if self._connection is websocket:
                 self._connection = None
@@ -115,13 +115,20 @@ class LiveBridge:
             request = json.dumps(
                 {"jsonrpc": "2.0", "id": req_id, "method": method, "params": params}
             )
+            logger.info("live -> %s id=%d (%d bytes)", method, req_id, len(request))
             try:
                 await ws.send(request)
                 raw = await asyncio.wait_for(ws.recv(), timeout=timeout)
+                logger.info(
+                    "live <- id=%d (%d bytes): %s",
+                    req_id, len(raw), str(raw)[:200],
+                )
             except (ConnectionClosed, asyncio.TimeoutError, OSError) as e:
                 if self._connection is ws:
                     self._connection = None
-                return False, f"live transport error: {e}"
+                etype = type(e).__name__
+                logger.warning("live transport error (%s): %s", etype, e)
+                return False, f"live transport error ({etype}): {e}"
 
             try:
                 data = json.loads(raw)
