@@ -8,7 +8,7 @@
 -- Topology: Aseprite Lua has a WebSocket client (no server), so the
 -- MCP process hosts the WS server and we are the client.
 
-local EXTENSION_VERSION = "0.1.3"
+local EXTENSION_VERSION = "0.1.4"
 local WS_URL = os.getenv("ASEPRITE_MCP_URL") or "ws://127.0.0.1:12700"
 
 -- Lua 5.2 removed loadstring; Aseprite ships Lua 5.4. Use load() and
@@ -109,7 +109,13 @@ local function handle_message(message)
     return
   end
 
+  -- Lua 5.4's json.decode returns numeric ids as floats (e.g. 1.0).
+  -- The wire format is preserved by json.encode either way, but log
+  -- lines and downstream consumers read better with ints.
   local id = req.id
+  if type(id) == "number" then
+    id = math.tointeger(id) or id
+  end
   local method = req.method
   local params = req.params or {}
 
