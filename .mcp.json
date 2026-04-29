@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "aseprite-colony": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "${CLAUDE_PLUGIN_ROOT}",
+        "run",
+        "-m",
+        "aseprite_mcp"
+      ]
+    }
+  }
+}

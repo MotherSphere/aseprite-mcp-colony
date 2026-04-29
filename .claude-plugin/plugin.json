@@ -1,0 +1,19 @@
+{
+  "name": "aseprite-mcp-colony",
+  "version": "0.2.0",
+  "description": "MCP server piloting Aseprite for the Colony / Project VN sprite pipeline. Bundled palette coherence and Bevy export skills.",
+  "author": {
+    "name": "MotherSphere"
+  },
+  "repository": "https://github.com/MotherSphere/aseprite-mcp-colony",
+  "license": "MIT",
+  "keywords": [
+    "aseprite",
+    "pixel-art",
+    "bevy",
+    "palette",
+    "sprite-sheet",
+    "mcp",
+    "claude"
+  ]
+}

@@ -5,6 +5,9 @@ from . import animation
 from . import preview
 from . import palette
 from . import palette_extract
+from . import palette_apply
+from . import palette_ramp
+from . import export_bevy
 from . import scene
 from . import guide
 from . import quality
