@@ -6,11 +6,17 @@ Forked from [diivi/aseprite-mcp](https://github.com/diivi/aseprite-mcp) (MIT). L
 
 ## Status
 
-Bootstrap. Upstream features as-is for now; Colony-specific additions land in `aseprite_mcp/colony/` (planned).
+Active. Upstream tools intact. Colony-specific additions live alongside in `aseprite_mcp/tools/`.
+
+## Colony additions
+
+| Tool | Purpose |
+|------|---------|
+| `extract_palette_from_image` | Quantize a reference image (Bloodborne/Stalker/grimdark screenshot, etc.) into a coherent palette. Outputs hex list + optional `.gpl` (Aseprite-compatible) and can apply directly to a target sprite. Alpha-aware: transparent pixels do not pollute the palette. |
 
 ## Requirements
 
-- Aseprite (any install — Steam, AUR, source). Set `ASEPRITE_PATH` if not on `PATH`.
+- Aseprite (any install: Steam, AUR, source). Set `ASEPRITE_PATH` if not on `PATH`.
 - Python 3.13+
 - `uv`
 

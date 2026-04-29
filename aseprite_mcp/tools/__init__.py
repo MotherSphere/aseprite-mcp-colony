@@ -4,6 +4,7 @@ from . import export
 from . import animation
 from . import preview
 from . import palette
+from . import palette_extract
 from . import scene
 from . import guide
 from . import quality
