@@ -48,6 +48,12 @@ async def draw_pixels(filename: str, pixels: List[Dict[str, Any]]) -> str:
             end
         end
 
+        if cel and (cel.image.width < spr.width or cel.image.height < spr.height or cel.position.x ~= 0 or cel.position.y ~= 0) then
+            local _full = Image(spr.width, spr.height, spr.colorMode)
+            _full:drawImage(cel.image, cel.position)
+            cel.image = _full
+            cel.position = Point(0, 0)
+        end
         local img = cel.image
         local cox = cel.position.x
         local coy = cel.position.y
@@ -144,6 +150,12 @@ async def draw_line(filename: str, x1: int, y1: int, x2: int, y2: int, color: st
             if not cel then
                 return "No active cel and couldn't create one"
             end
+        end
+        if cel and (cel.image.width < spr.width or cel.image.height < spr.height or cel.position.x ~= 0 or cel.position.y ~= 0) then
+            local _full = Image(spr.width, spr.height, spr.colorMode)
+            _full:drawImage(cel.image, cel.position)
+            cel.image = _full
+            cel.position = Point(0, 0)
         end
         local img = cel.image
         local cox = cel.position.x
@@ -383,6 +395,12 @@ async def draw_pixels_at(
             cel = spr:newCel(target, spr.frames[idx], img, Point(0, 0))
         end
         if not cel then return end
+        if cel and (cel.image.width < spr.width or cel.image.height < spr.height or cel.position.x ~= 0 or cel.position.y ~= 0) then
+            local _full = Image(spr.width, spr.height, spr.colorMode)
+            _full:drawImage(cel.image, cel.position)
+            cel.image = _full
+            cel.position = Point(0, 0)
+        end
         local img = cel.image
         local cox = cel.position.x
         local coy = cel.position.y
@@ -484,6 +502,12 @@ async def draw_line_at(
             cel = spr:newCel(target, spr.frames[idx], img, Point(0, 0))
         end
         if not cel then return end
+        if cel and (cel.image.width < spr.width or cel.image.height < spr.height or cel.position.x ~= 0 or cel.position.y ~= 0) then
+            local _full = Image(spr.width, spr.height, spr.colorMode)
+            _full:drawImage(cel.image, cel.position)
+            cel.image = _full
+            cel.position = Point(0, 0)
+        end
         local img = cel.image
         local cox = cel.position.x
         local coy = cel.position.y
@@ -797,6 +821,12 @@ async def draw_polygon(
             cel = spr:newCel(target, spr.frames[idx], img, Point(0, 0))
         end
         if not cel then return end
+        if cel and (cel.image.width < spr.width or cel.image.height < spr.height or cel.position.x ~= 0 or cel.position.y ~= 0) then
+            local _full = Image(spr.width, spr.height, spr.colorMode)
+            _full:drawImage(cel.image, cel.position)
+            cel.image = _full
+            cel.position = Point(0, 0)
+        end
         local img = cel.image
         local cox = cel.position.x
         local coy = cel.position.y
@@ -901,6 +931,12 @@ async def draw_path(
             cel = spr:newCel(target, spr.frames[idx], img, Point(0, 0))
         end
         if not cel then return end
+        if cel and (cel.image.width < spr.width or cel.image.height < spr.height or cel.position.x ~= 0 or cel.position.y ~= 0) then
+            local _full = Image(spr.width, spr.height, spr.colorMode)
+            _full:drawImage(cel.image, cel.position)
+            cel.image = _full
+            cel.position = Point(0, 0)
+        end
         local img = cel.image
         local cox = cel.position.x
         local coy = cel.position.y
@@ -979,6 +1015,12 @@ async def apply_gradient_rect(
             cel = spr:newCel(target, spr.frames[idx], img, Point(0, 0))
         end
         if not cel then return end
+        if cel and (cel.image.width < spr.width or cel.image.height < spr.height or cel.position.x ~= 0 or cel.position.y ~= 0) then
+            local _full = Image(spr.width, spr.height, spr.colorMode)
+            _full:drawImage(cel.image, cel.position)
+            cel.image = _full
+            cel.position = Point(0, 0)
+        end
         local img = cel.image
         local cox = cel.position.x
         local coy = cel.position.y
