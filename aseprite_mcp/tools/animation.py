@@ -157,7 +157,7 @@ async def set_layer_opacity(filename: str, layer_name: str, opacity: int) -> str
 
 @mcp.tool()
 async def get_sprite_info(filename: str) -> str:
-    """Return sprite info as JSON string (size, frame count, layers).
+    """Return sprite info as JSON (size, frames, frame_durations_ms, layers, tags).
 
     Args:
         filename: Name of the Aseprite file to inspect
@@ -166,6 +166,20 @@ async def get_sprite_info(filename: str) -> str:
         return f"File {filename} not found"
 
     script = """
+    local function jesc(s)
+        s = s:gsub("\\\\", "\\\\\\\\")
+        s = s:gsub("\\"", "\\\\\\"")
+        return s
+    end
+
+    local function aniDirName(d)
+        if d == 0 then return "forward"
+        elseif d == 1 then return "reverse"
+        elseif d == 2 then return "pingpong"
+        elseif d == 3 then return "pingpong_reverse"
+        else return "forward" end
+    end
+
     local spr = app.activeSprite
     if not spr then return "No active sprite" end
 
@@ -174,13 +188,28 @@ async def get_sprite_info(filename: str) -> str:
     table.insert(parts, "\\"width\\":" .. spr.width .. ",")
     table.insert(parts, "\\"height\\":" .. spr.height .. ",")
     table.insert(parts, "\\"frames\\":" .. #spr.frames .. ",")
+
+    table.insert(parts, "\\"frame_durations_ms\\":[")
+    for i, frame in ipairs(spr.frames) do
+        table.insert(parts, tostring(math.floor(frame.duration * 1000 + 0.5)))
+        if i < #spr.frames then table.insert(parts, ",") end
+    end
+    table.insert(parts, "],")
+
     table.insert(parts, "\\"layers\\":[")
     for i, layer in ipairs(spr.layers) do
-        local entry = "{\\"name\\":\\"" .. layer.name .. "\\",\\"visible\\":" .. tostring(layer.isVisible) .. ",\\"opacity\\":" .. layer.opacity .. "}"
+        local entry = "{\\"name\\":\\"" .. jesc(layer.name) .. "\\",\\"visible\\":" .. tostring(layer.isVisible) .. ",\\"opacity\\":" .. layer.opacity .. "}"
         table.insert(parts, entry)
-        if i < #spr.layers then
-            table.insert(parts, ",")
-        end
+        if i < #spr.layers then table.insert(parts, ",") end
+    end
+    table.insert(parts, "],")
+
+    table.insert(parts, "\\"tags\\":[")
+    for i, t in ipairs(spr.tags) do
+        local color_hex = string.format("#%02X%02X%02X", t.color.red, t.color.green, t.color.blue)
+        local entry = "{\\"name\\":\\"" .. jesc(t.name) .. "\\",\\"from\\":" .. t.fromFrame.frameNumber .. ",\\"to\\":" .. t.toFrame.frameNumber .. ",\\"ani_dir\\":\\"" .. aniDirName(t.aniDir) .. "\\",\\"color\\":\\"" .. color_hex .. "\\"}"
+        table.insert(parts, entry)
+        if i < #spr.tags then table.insert(parts, ",") end
     end
     table.insert(parts, "]}")
     return table.concat(parts)

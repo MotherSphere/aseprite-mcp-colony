@@ -429,7 +429,15 @@ def _animation_lua(slug: str, cycle: dict[str, Any], add_to_existing: bool, w: i
     return f"""
     {prelude}
     app.transaction(function()
+        local saved_tags = {{}}
+        for _, t in ipairs(spr.tags) do
+            table.insert(saved_tags, {{tag = t, from = t.fromFrame.frameNumber, to = t.toFrame.frameNumber}})
+        end
         {add_frames_block}
+        for _, info in ipairs(saved_tags) do
+            info.tag.fromFrame = spr.frames[info.from]
+            info.tag.toFrame = spr.frames[info.to]
+        end
 {duration_lines}
         local tag = spr:newTag(start_count + 1, start_count + {n})
         tag.name = "{name}"
