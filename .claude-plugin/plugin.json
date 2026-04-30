@@ -1,7 +1,7 @@
 {
   "name": "aseprite-mcp-colony",
-  "version": "0.2.0",
-  "description": "MCP server piloting Aseprite for the Colony / Project VN sprite pipeline. Bundled palette coherence and Bevy export skills.",
+  "version": "0.3.0",
+  "description": "MCP server piloting Aseprite for the Colony / Project VN sprite pipeline. Bundled creative presets (45 palettes, 14 dither patterns, 6 dither kernels, 12 tile templates, 24 animation cycles, 6 reference docs) plus palette coherence and Bevy export skills.",
   "author": {
     "name": "MotherSphere"
   },

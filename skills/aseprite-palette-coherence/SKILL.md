@@ -14,8 +14,15 @@ Use this when new art must match an existing color space.
    - Returns hex list and writes a `.gpl` you can reuse.
    - Alpha-aware: transparent pixels do not pollute the palette.
 
+   OR pick a bundled preset palette - 45 are shipped:
+   - `list_preset_palettes(curated_set="dark_fantasy_vn")` -> 12 moody fits (Steam Lords, Lost Century, NYX8...)
+   - `list_preset_palettes(curated_set="vn_full_color")` -> 6 painterly large palettes
+   - `apply_preset_palette(slug, target_aseprite)` for direct application
+   - `get_preset_palette_info(slug)` for the abs `.gpl` path to feed `quantize_image_to_palette`
+
 2. **Apply** that palette to a target sprite:
    - `apply_gpl_palette(gpl_path, target_aseprite)` if you saved a `.gpl`.
+   - `apply_preset_palette(slug, target_aseprite)` for a bundled preset.
    - Or `set_palette(filename, colors)` directly with a hex list.
 
 3. **Snap** externally-generated art onto the palette:
