@@ -1,0 +1,55 @@
+{
+  "slug": "plank_horizontal",
+  "name": "Plank horizontal (14-2)",
+  "description": "Wooden plank floor, horizontal layout. 16x16 tile = 1 plank 14px + 2px gap below.",
+  "rule_summary": "1px gap top, 14px plank body, 1px gap bottom. Add wood grain via 2-3 vertical-going horizontal lines (rule of thirds vertically). Knots: 1 per plank as small clusters of darker color.",
+  "source": "Saint11 - Pixel Art Class - Wood Tutorial",
+  "canvas": {"width": 16, "height": 16, "frames": 1},
+  "palette_tags_recommended": ["warm", "autumn", "muted"],
+  "color_hint_swatches": ["#7a4a2b", "#5a3520", "#9c6a45", "#3d2515"],
+  "color_hint_roles": {
+    "#7a4a2b": "wood_base",
+    "#5a3520": "wood_shadow",
+    "#9c6a45": "wood_highlight",
+    "#3d2515": "gap"
+  },
+  "layers": [
+    {
+      "name": "GUIDE",
+      "visible": false,
+      "opacity": 128,
+      "purpose": "Plank seams at y=0 and y=15.",
+      "pixels_color": "#ff00ff",
+      "pixels": [
+        [0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0], [10, 0], [11, 0], [12, 0], [13, 0], [14, 0], [15, 0],
+        [0, 15], [1, 15], [2, 15], [3, 15], [4, 15], [5, 15], [6, 15], [7, 15], [8, 15], [9, 15], [10, 15], [11, 15], [12, 15], [13, 15], [14, 15], [15, 15]
+      ]
+    },
+    {
+      "name": "GAP",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Pre-fill the seams (top and bottom rows).",
+      "pixels_color": "#3d2515",
+      "pixels_from_guide": true
+    },
+    {
+      "name": "plank_body",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Plank fill, rows 1-14."
+    },
+    {
+      "name": "grain",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Horizontal grain lines: 2-3 lines, slightly broken, at rule-of-thirds."
+    },
+    {
+      "name": "knot",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "1-2 knots per plank: 2x2 dark cluster with concentric ring."
+    }
+  ]
+}

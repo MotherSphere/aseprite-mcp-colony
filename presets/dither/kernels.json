@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "kind": "ordered_and_error_diffusion",
+  "description": "Ordered Bayer threshold matrices and error-diffusion kernels for palette-aware dithering. Bayer matrices are normalized 0..1 thresholds; for an input pixel value v in [0,1], pixel becomes black if v < threshold[y%n][x%n], else white. Error-diffusion kernels list (dx, dy, weight) terms to push quantization error into not-yet-visited neighbors (assumes left-to-right, top-to-bottom scan). Sum of weights = 1.",
+  "ordered": {
+    "bayer_2x2": {
+      "size": [2, 2],
+      "max": 4,
+      "matrix": [[0, 2], [3, 1]],
+      "use": "Cheapest ordered dither. Very visible cross-hatch pattern - works for retro feel.",
+      "tags": ["ordered", "retro", "low_res"]
+    },
+    "bayer_4x4": {
+      "size": [4, 4],
+      "max": 16,
+      "matrix": [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]],
+      "use": "Classic 4x4 Bayer. Visible 4-cycle pattern. Good for low-res pixel art with intentional grain.",
+      "tags": ["ordered", "classic", "pixel_art"]
+    },
+    "bayer_8x8": {
+      "size": [8, 8],
+      "max": 64,
+      "matrix": [
+        [ 0, 32,  8, 40,  2, 34, 10, 42],
+        [48, 16, 56, 24, 50, 18, 58, 26],
+        [12, 44,  4, 36, 14, 46,  6, 38],
+        [60, 28, 52, 20, 62, 30, 54, 22],
+        [ 3, 35, 11, 43,  1, 33,  9, 41],
+        [51, 19, 59, 27, 49, 17, 57, 25],
+        [15, 47,  7, 39, 13, 45,  5, 37],
+        [63, 31, 55, 23, 61, 29, 53, 21]
+      ],
+      "use": "Smoothest ordered dither for pixel art. Pattern still visible but less repetitive. Good for gradients in mid-res sprites.",
+      "tags": ["ordered", "smooth", "gradient"]
+    },
+    "bayer_16x16": {
+      "size": [16, 16],
+      "max": 256,
+      "use": "Generated procedurally - matrix omitted to save space. Use only for HD pixel art (>=128px). At standard 16-32px sprites the pattern won't tile within the asset.",
+      "procedural": true,
+      "tags": ["ordered", "hd_only"]
+    }
+  },
+  "error_diffusion": {
+    "floyd_steinberg": {
+      "kernel": [[1, 0, 0.4375], [-1, 1, 0.1875], [0, 1, 0.3125], [1, 1, 0.0625]],
+      "divisor": 1.0,
+      "use": "The default photo dither. Spreads error to 4 neighbors. Slight diagonal pattern bias. Best general-purpose error diffusion.",
+      "tags": ["error_diffusion", "default", "photo"]
+    },
+    "jjn": {
+      "kernel": [
+        [1, 0, 7], [2, 0, 5],
+        [-2, 1, 3], [-1, 1, 5], [0, 1, 7], [1, 1, 5], [2, 1, 3],
+        [-2, 2, 1], [-1, 2, 3], [0, 2, 5], [1, 2, 3], [2, 2, 1]
+      ],
+      "divisor": 48,
+      "use": "Jarvis-Judice-Ninke. 12 neighbors, smoother than Floyd-Steinberg, slower. Good for high-res.",
+      "tags": ["error_diffusion", "smooth", "hd"]
+    },
+    "stucki": {
+      "kernel": [
+        [1, 0, 8], [2, 0, 4],
+        [-2, 1, 2], [-1, 1, 4], [0, 1, 8], [1, 1, 4], [2, 1, 2],
+        [-2, 2, 1], [-1, 2, 2], [0, 2, 4], [1, 2, 2], [2, 2, 1]
+      ],
+      "divisor": 42,
+      "use": "Stucki. Faster than JJN, similar quality. Less directional bias than Floyd-Steinberg.",
+      "tags": ["error_diffusion", "smooth"]
+    },
+    "burkes": {
+      "kernel": [
+        [1, 0, 8], [2, 0, 4],
+        [-2, 1, 2], [-1, 1, 4], [0, 1, 8], [1, 1, 4], [2, 1, 2]
+      ],
+      "divisor": 32,
+      "use": "Burkes. Single-row diffusion below current. Faster than Stucki, slight horizontal grain.",
+      "tags": ["error_diffusion", "fast"]
+    },
+    "sierra_lite": {
+      "kernel": [[1, 0, 2], [-1, 1, 1], [0, 1, 1]],
+      "divisor": 4,
+      "use": "Sierra Lite. Minimum 3-neighbor diffusion. Fastest error-diffusion. Slight diagonal bias.",
+      "tags": ["error_diffusion", "fast", "minimal"]
+    },
+    "atkinson": {
+      "kernel": [
+        [1, 0, 1], [2, 0, 1],
+        [-1, 1, 1], [0, 1, 1], [1, 1, 1],
+        [0, 2, 1]
+      ],
+      "divisor": 8,
+      "note": "Sum of kernel weights is 6/8, NOT 1. The original Atkinson-on-Mac diffuses only 75% of the error - the rest is dropped. Result: high-contrast crispy look, blacks stay black, whites stay white.",
+      "use": "Atkinson (classic Mac). Loses 25% of error - high-contrast crisp result, prized for pixel art texture. Recommended starting point.",
+      "tags": ["error_diffusion", "crispy", "pixel_art", "recommended"]
+    }
+  }
+}

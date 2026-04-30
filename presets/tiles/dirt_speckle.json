@@ -1,0 +1,51 @@
+{
+  "slug": "dirt_speckle",
+  "name": "Dirt speckle",
+  "description": "Top-down dirt ground. 16x16 base + scattered 1px speckles for texture.",
+  "rule_summary": "Base ground, then ~12 single-pixel darker speckles + ~6 single-pixel lighter speckles, distributed organically (no grid). Add 1-2 small pebble clusters (2x2).",
+  "source": "Saint11 - Ground Tutorial + Slynyrd general",
+  "canvas": {"width": 16, "height": 16, "frames": 1},
+  "palette_tags_recommended": ["warm", "muted", "autumn"],
+  "color_hint_swatches": ["#5a4530", "#3a2a1c", "#7a6045", "#9c8060"],
+  "color_hint_roles": {
+    "#5a4530": "dirt_base",
+    "#3a2a1c": "dirt_shadow",
+    "#7a6045": "dirt_highlight",
+    "#9c8060": "pebble"
+  },
+  "layers": [
+    {
+      "name": "GUIDE",
+      "visible": false,
+      "opacity": 128,
+      "purpose": "Suggested speckle and pebble centers.",
+      "pixels_color": "#ff00ff",
+      "pixels": [[2, 3], [9, 5], [13, 2], [4, 8], [11, 10], [6, 13], [14, 14], [1, 12]]
+    },
+    {
+      "name": "dirt",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Base ground (full 16x16).",
+      "fill_all": "#5a4530"
+    },
+    {
+      "name": "speckles_dark",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "1px darker speckles, 10-14 distributed."
+    },
+    {
+      "name": "speckles_light",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "1px lighter speckles, 5-7 distributed."
+    },
+    {
+      "name": "pebbles",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "1-2 small (2x2) pebble clusters."
+    }
+  ]
+}

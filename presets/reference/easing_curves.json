@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "topic": "easing_curves",
+  "description": "Robert Penner's easing functions, the canonical reference for animation interpolation. Each entry includes the formula and use-case. For pixel-art tweens, prefer In/Out variants - linear motion looks robotic.",
+  "curves": {
+    "linear": {
+      "formula": "f(t) = t",
+      "feel": "Robotic, mechanical",
+      "use": ["mechanical_motion", "scroll_at_constant_speed", "infinite_loop_pan"]
+    },
+    "ease_in_quad": {
+      "formula": "f(t) = t * t",
+      "feel": "Slow start, fast end",
+      "use": ["object_falling", "punch_starting"]
+    },
+    "ease_out_quad": {
+      "formula": "f(t) = 1 - (1-t)^2",
+      "feel": "Fast start, slow end",
+      "use": ["object_landing", "deceleration", "ui_panel_slide_in"]
+    },
+    "ease_in_out_quad": {
+      "formula": "f(t) = t<0.5 ? 2t^2 : 1 - 2(1-t)^2",
+      "feel": "Slow start, fast middle, slow end",
+      "use": ["pendulum", "wave_motion", "cinematic_pan"]
+    },
+    "ease_in_cubic": {
+      "formula": "f(t) = t^3",
+      "feel": "Stronger ease-in than quad",
+      "use": ["dramatic_drop", "anticipation"]
+    },
+    "ease_out_cubic": {
+      "formula": "f(t) = 1 - (1-t)^3",
+      "feel": "Stronger ease-out than quad",
+      "use": ["satisfying_landing", "ui_settle"]
+    },
+    "ease_in_out_cubic": {
+      "formula": "f(t) = t<0.5 ? 4t^3 : 1 - 4(1-t)^3",
+      "feel": "S-curve, classic",
+      "use": ["camera_pan", "dialog_box_open"]
+    },
+    "ease_in_quart": {
+      "formula": "f(t) = t^4",
+      "feel": "Very strong ease-in",
+      "use": ["explosive_acceleration"]
+    },
+    "ease_out_quart": {
+      "formula": "f(t) = 1 - (1-t)^4",
+      "feel": "Very strong ease-out",
+      "use": ["heavy_object_settling"]
+    },
+    "ease_in_quint": {
+      "formula": "f(t) = t^5",
+      "feel": "Extreme ease-in",
+      "use": ["dramatic_anticipation"]
+    },
+    "ease_out_quint": {
+      "formula": "f(t) = 1 - (1-t)^5",
+      "feel": "Extreme ease-out, almost instant arrival",
+      "use": ["rocket_arriving_to_target"]
+    },
+    "ease_in_sine": {
+      "formula": "f(t) = 1 - cos(t * pi/2)",
+      "feel": "Subtle ease-in",
+      "use": ["gentle_acceleration", "ambient_sway_start"]
+    },
+    "ease_out_sine": {
+      "formula": "f(t) = sin(t * pi/2)",
+      "feel": "Subtle ease-out",
+      "use": ["gentle_deceleration"]
+    },
+    "ease_in_out_sine": {
+      "formula": "f(t) = -(cos(pi*t) - 1) / 2",
+      "feel": "Smooth gentle S-curve",
+      "use": ["idle_breathing", "gentle_camera_drift"]
+    },
+    "ease_in_expo": {
+      "formula": "f(t) = t==0 ? 0 : 2^(10(t-1))",
+      "feel": "Exponential ease-in",
+      "use": ["building_charge", "siren_winding_up"]
+    },
+    "ease_out_expo": {
+      "formula": "f(t) = t==1 ? 1 : 1 - 2^(-10t)",
+      "feel": "Exponential ease-out",
+      "use": ["instant_freeze", "shockwave_arriving"]
+    },
+    "ease_in_circ": {
+      "formula": "f(t) = 1 - sqrt(1 - t^2)",
+      "feel": "Circular ease-in",
+      "use": ["arc_acceleration"]
+    },
+    "ease_out_circ": {
+      "formula": "f(t) = sqrt(1 - (t-1)^2)",
+      "feel": "Circular ease-out",
+      "use": ["arc_deceleration"]
+    },
+    "ease_in_back": {
+      "formula": "f(t) = c3*t^3 - c1*t^2  (c1=1.70158, c3=c1+1)",
+      "feel": "Pulls BACK before going forward (anticipation)",
+      "use": ["jump_anticipation", "spring_loading", "punch_windup"]
+    },
+    "ease_out_back": {
+      "formula": "f(t) = 1 + c3*(t-1)^3 + c1*(t-1)^2",
+      "feel": "Overshoots target then settles back (follow-through)",
+      "use": ["dialog_box_pop_in", "menu_appear", "spring_release"]
+    },
+    "ease_in_out_back": {
+      "formula": "complex S-curve with both back ends",
+      "feel": "Anticipation + overshoot",
+      "use": ["dramatic_entrance"]
+    },
+    "ease_in_elastic": {
+      "formula": "f(t) = -(2^(10(t-1)) * sin((t-1.075)*pi/0.3))",
+      "feel": "Bouncy oscillating ease-in",
+      "use": ["wobble_anticipation", "rubber_band_pull"]
+    },
+    "ease_out_elastic": {
+      "formula": "f(t) = 2^(-10t) * sin((t-0.075)*pi/0.3) + 1",
+      "feel": "Bouncy oscillating ease-out (overshoot + settle)",
+      "use": ["bouncy_ui_appear", "rubber_band_release"]
+    },
+    "ease_in_bounce": {
+      "formula": "f(t) = 1 - ease_out_bounce(1-t)",
+      "feel": "Bouncing ball reverse (rare)",
+      "use": ["weird_effects"]
+    },
+    "ease_out_bounce": {
+      "formula": "piecewise: bounces 4 times before settling",
+      "feel": "Bouncing ball coming to rest",
+      "use": ["item_drop_to_ground", "pickup_collect"]
+    }
+  },
+  "pixel_art_specific": {
+    "warning": "At low resolution, ease curves with overshoot (back/elastic/bounce) need at least 4 frames to read correctly. With 2 frames they look like glitches.",
+    "minimum_frames_per_curve": {
+      "linear": 2,
+      "ease_in_out": 3,
+      "ease_*_back": 4,
+      "ease_*_elastic": 5,
+      "ease_*_bounce": 6
+    }
+  },
+  "tween_recipes": {
+    "ui_button_press": "ease_out_back, 8 frames",
+    "dialog_box_open": "ease_out_quad, 6 frames",
+    "menu_appear": "ease_out_back, 8 frames",
+    "screen_fade": "ease_in_out_sine, 12 frames",
+    "camera_to_target": "ease_in_out_cubic, 16 frames",
+    "item_pickup_pop": "ease_out_elastic, 10 frames",
+    "shake": "linear with random offset, 4-8 frames",
+    "death_fall": "ease_in_quad, 12 frames",
+    "spell_charge": "ease_in_expo, 24 frames"
+  }
+}

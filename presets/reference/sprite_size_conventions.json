@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "topic": "sprite_size_conventions",
+  "description": "Canonical sprite/tile sizes per era, genre, and use case. When picking a size, match peer references in the same genre - don't outsize them or you'll lose the pixel-art idiom.",
+  "tiles": {
+    "8x8": {
+      "era": "NES, GameBoy",
+      "use": ["roguelike", "minimalist", "demake"],
+      "examples": ["Pokemon Red/Blue", "Zelda 1", "1-bit roguelikes"]
+    },
+    "16x16": {
+      "era": "SNES, GBA, modern indie standard",
+      "use": ["jrpg", "platformer", "metroidvania", "dungeon-crawler", "vn-grid"],
+      "examples": ["FF6", "Chrono Trigger", "Stardew Valley", "Project VN dungeon"]
+    },
+    "24x24": {
+      "era": "uncommon, indie",
+      "use": ["isometric", "non-grid"],
+      "examples": ["Risk of Rain 1"]
+    },
+    "32x32": {
+      "era": "modern indie large-tile",
+      "use": ["adventure", "exploration", "detail-heavy environments"],
+      "examples": ["Hyper Light Drifter", "Eastward"]
+    },
+    "48x48": {
+      "era": "modern HD pixel art",
+      "use": ["cinematic platformer"],
+      "examples": ["Owlboy"]
+    },
+    "64x64": {
+      "era": "modern HD pixel art",
+      "use": ["highly detailed environments"],
+      "examples": ["Songs of Conquest"]
+    }
+  },
+  "characters": {
+    "8x8": {
+      "era": "extreme retro / chibi NES",
+      "use": ["minor_enemy", "minimal_npc"]
+    },
+    "16x16": {
+      "era": "NES",
+      "use": ["jrpg_classic_npc", "small_enemy"],
+      "examples": ["FF1 NPCs", "Pokemon overworld"]
+    },
+    "16x24": {
+      "era": "NES tall character",
+      "use": ["nes_hero"],
+      "examples": ["Zelda 1 Link"]
+    },
+    "24x24": {
+      "era": "SNES jrpg",
+      "use": ["jrpg_hero_overworld"],
+      "examples": ["Chrono Trigger overworld", "FF6 overworld"]
+    },
+    "32x32": {
+      "era": "SNES action / modern indie hero",
+      "use": ["action_hero", "metroidvania_hero", "vn_character"],
+      "examples": ["Cave Story", "Hyper Light Drifter"]
+    },
+    "32x48": {
+      "era": "modern indie tall hero",
+      "use": ["polished_action_hero"],
+      "examples": ["Owlboy", "Death's Door pixel-art renders"]
+    },
+    "64x64": {
+      "era": "boss-tier or HD hero",
+      "use": ["boss", "hd_hero"]
+    },
+    "128x128": {
+      "era": "cinematic boss / portrait",
+      "use": ["large_boss", "vn_portrait_close"]
+    }
+  },
+  "vn_portraits": {
+    "small_dialog_box_corner": "64x64 to 96x96 - chibi expression in dialog box corner",
+    "medium_half_body": "192x256 - half body portrait next to dialog text",
+    "large_full_body": "256x512 to 512x768 - full body character art (Persona style)",
+    "fullscreen_event_cg": "640x480 to 1280x960 (16-bit aspect for retro feel) - story event illustration"
+  },
+  "ui": {
+    "icon_small": "8x8 - minimap, status icons",
+    "icon_medium": "16x16 - inventory item icons (jrpg_standard)",
+    "icon_large": "24x24 to 32x32 - skill icons, equipment slots",
+    "button_small": "32x16 - text-only button",
+    "button_medium": "48x24 to 64x24 - icon+text button",
+    "frame_corner": "8x8 to 16x16 - 9-slice corner",
+    "frame_edge": "8x4 or 4x8 - 9-slice edge",
+    "cursor": "8x8 to 16x16 - mouse/selection cursor"
+  },
+  "atlas_size_recommendations": {
+    "rule": "Power-of-2 atlas sizes pack better and play nicer with GPUs. 256, 512, 1024, 2048.",
+    "small_indie_full_atlas": "1024x1024 - fits ~64 32x32 sprites comfortably",
+    "medium_atlas": "2048x2048 - full character set + tiles",
+    "max_recommended": "4096x4096 - some mobile GPUs cap here, beyond is risky"
+  },
+  "project_vn_specific": {
+    "tile": "16x16 (matches existing 0x72 dungeon ii pack)",
+    "character_overworld": "24x24 (jrpg classic ratio)",
+    "character_combat": "32x32 (more detail in turn-based combat view)",
+    "enemy_combat": "32x32 to 64x64 depending on tier (minor/major/boss)",
+    "portrait": "192x256 half-body (parchemin frame fit)",
+    "ui_icon": "16x16 standard",
+    "atlas_target": "1024x1024 per category (tiles, characters, enemies, ui)"
+  }
+}

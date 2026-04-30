@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "topic": "color_theory",
+  "description": "Color harmony schemes and practical hue/saturation/lightness rules for pixel art. References based on Itten's color wheel + practical pixel-art deviations.",
+  "harmonies": {
+    "monochromatic": {
+      "rule": "Single hue, varied saturation/lightness. Most coherent, can be boring.",
+      "use": ["mood-piece", "1-bit-with-warmth", "grimoire UI"],
+      "example_palettes": ["1bit-monitor-glow", "blessing", "ayy4"]
+    },
+    "analogous": {
+      "rule": "3 hues adjacent on the wheel (within ~30 degrees). Calming, naturalistic.",
+      "use": ["forest_scene", "sunset", "underwater"],
+      "example_combos": ["red+orange+yellow (autumn)", "blue+teal+green (forest stream)", "violet+blue+cyan (night sky)"],
+      "example_palettes": ["slso8 (warm analogous)", "moonlight-gb (cool analogous)"]
+    },
+    "complementary": {
+      "rule": "2 hues opposite on wheel. Maximum contrast. Use one as accent only - 80/20 split.",
+      "use": ["focal-point", "boss vs hero", "danger vs safe"],
+      "classic_pairs": ["red/cyan", "orange/blue", "yellow/violet", "green/magenta"],
+      "example": "Red boss against teal-blue dungeon: viewer eye locks on boss"
+    },
+    "split_complementary": {
+      "rule": "1 hue + the 2 hues adjacent to its complement. Less harsh than full complementary.",
+      "use": ["balanced focal", "JRPG hero against varied enemies"],
+      "example": "warm orange hero + cool blue-purple and blue-green enemies"
+    },
+    "triadic": {
+      "rule": "3 hues evenly spaced (120 degrees apart). Vibrant but balanced.",
+      "use": ["arcade", "saturated indie"],
+      "classic": ["red+yellow+blue", "orange+green+violet"],
+      "warning": "Easy to land in clown territory if all 3 are equal saturation. Knock 2 down to muted."
+    },
+    "tetradic": {
+      "rule": "4 hues forming rectangle on wheel (2 complementary pairs). Most variety, hardest to balance.",
+      "use": ["full game palette", "diverse cast"],
+      "tip": "Pick one dominant hue, 2 supporting, 1 accent."
+    },
+    "achromatic_with_accent": {
+      "rule": "Grayscale base + 1 saturated accent color used sparingly.",
+      "use": ["noir", "dark_fantasy", "Schindler's List effect"],
+      "example": "Steam Lords + a single blood-red accent for combat hits"
+    }
+  },
+  "hue_shift_table": {
+    "description": "Practical degree shifts for shadow/highlight in pixel art. NEVER pure lightness change.",
+    "shadow_shift": {
+      "red_base": -20,
+      "orange_base": -15,
+      "yellow_base": -10,
+      "green_base": +25,
+      "teal_base": +15,
+      "blue_base": +15,
+      "purple_base": -10,
+      "magenta_base": -15
+    },
+    "highlight_shift": {
+      "red_base": +15,
+      "orange_base": +10,
+      "yellow_base": -5,
+      "green_base": -15,
+      "teal_base": -20,
+      "blue_base": -25,
+      "purple_base": +20,
+      "magenta_base": +25
+    },
+    "saturation_curve": {
+      "shadow": "-15% to -25% saturation (going darker = less saturation up to mid, then can spike at deep shadow)",
+      "highlight": "+10% to +20% (highlights are MORE saturated than mid-tones, contrary to instinct)",
+      "midtone": "lowest saturation point of ramp"
+    }
+  },
+  "temperature_rules": {
+    "warm_recede_or_advance": "Warm colors (red/orange/yellow) ADVANCE - they appear closer. Cool colors RECEDE - they appear further.",
+    "use_for_depth": "Distant mountains = cooler/desaturated. Foreground = warmer/saturated.",
+    "lighting_temperature": {
+      "morning": "warm yellow tint",
+      "noon": "neutral white",
+      "afternoon": "neutral",
+      "golden_hour": "very warm orange",
+      "twilight": "cool purple",
+      "night": "cool blue",
+      "moonlight": "very cool blue-cyan",
+      "candlelight": "very warm orange-red",
+      "magic_glow": "any saturated hue (signals supernatural)"
+    }
+  },
+  "contrast_levels": {
+    "value_contrast": "Difference in lightness. Most important for readability.",
+    "high_contrast": "delta_L > 50% - silhouette reads at any zoom",
+    "medium_contrast": "delta_L 25-50% - reads at game-zoom",
+    "low_contrast": "delta_L < 25% - subtle texture only",
+    "rule": "Sprite-vs-background should be HIGH contrast in value. Within-sprite shading can be medium-low."
+  },
+  "narrative_color_associations": {
+    "western": {
+      "red": ["danger", "passion", "blood", "warning", "evil"],
+      "blue": ["calm", "trust", "sadness", "cold", "magic"],
+      "green": ["nature", "growth", "poison", "envy", "fae"],
+      "yellow": ["caution", "joy", "cowardice", "gold"],
+      "purple": ["royalty", "magic", "mystery", "decadence"],
+      "black": ["death", "elegance", "void", "evil"],
+      "white": ["purity", "death (eastern)", "winter", "empty"]
+    },
+    "dark_fantasy_specific": {
+      "deep_red": "blood, sacrifice, eldritch",
+      "sickly_green": "decay, poison, witchery",
+      "muted_purple": "necromancy, royalty fallen",
+      "rust_orange": "iron, age, autumnal death",
+      "bone_white": "death, ascetic, holy",
+      "void_black": "abyss, beyond"
+    }
+  }
+}

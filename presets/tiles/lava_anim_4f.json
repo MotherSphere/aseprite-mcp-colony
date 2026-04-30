@@ -1,0 +1,40 @@
+{
+  "slug": "lava_anim_4f",
+  "name": "Lava animated 4f",
+  "description": "Looping 4-frame lava tile, 16x16. Bright crackling magma with shifting cracks.",
+  "rule_summary": "Base dark lava, animated cracks of bright orange, shifting and pulsing across 4 frames. Frame durations 150ms = 600ms loop (faster than water).",
+  "source": "General arcade lava + Spelunky lava reference",
+  "canvas": {"width": 16, "height": 16, "frames": 4, "frame_duration_ms": 150},
+  "palette_tags_recommended": ["warm", "horror", "vibrant"],
+  "color_hint_swatches": ["#3a1010", "#1a0808", "#c83820", "#fae060"],
+  "color_hint_roles": {
+    "#3a1010": "lava_base",
+    "#1a0808": "lava_shadow",
+    "#c83820": "lava_mid",
+    "#fae060": "lava_hot"
+  },
+  "layers": [
+    {
+      "name": "lava_base",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Full 16x16 dark lava base across all 4 frames.",
+      "fill_all_frames": "#3a1010"
+    },
+    {
+      "name": "cracks",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Glowing crack pattern. Frame 1 = thin, Frame 2 = brightest, Frame 3 = wide, Frame 4 = fading."
+    },
+    {
+      "name": "hot_spots",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Pulsing bright spots (yellow-white) at crack intersections."
+    }
+  ],
+  "tags_animation": [
+    {"name": "loop", "from": 1, "to": 4, "direction": "forward"}
+  ]
+}

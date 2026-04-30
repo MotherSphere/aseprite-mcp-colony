@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "kind": "binary_patterns",
+  "description": "2-color tile patterns. Each pattern is a 0/1 matrix where 1 means color_a, 0 means color_b. Tile across a region for repeating fills. Use these for hand-painted dither (artistically placed) rather than perceptual dither (use kernels.json for that).",
+  "patterns": {
+    "checker_2": {
+      "size": [2, 2],
+      "matrix": [[1, 0], [0, 1]],
+      "use": "50/50 stipple. Cheapest dither. Most uniform read.",
+      "tags": ["50_50", "uniform"]
+    },
+    "checker_4": {
+      "size": [4, 4],
+      "matrix": [[1, 0, 1, 0], [0, 1, 0, 1], [1, 0, 1, 0], [0, 1, 0, 1]],
+      "use": "Same as checker_2 but tiled 4x4 for predictable seams.",
+      "tags": ["50_50", "uniform"]
+    },
+    "dots_25": {
+      "size": [4, 4],
+      "matrix": [[1, 0, 0, 0], [0, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0]],
+      "use": "25% sparse dot. Good for very subtle texture overlay.",
+      "tags": ["sparse", "noise"]
+    },
+    "dots_75": {
+      "size": [4, 4],
+      "matrix": [[0, 1, 1, 1], [1, 1, 1, 1], [1, 1, 0, 1], [1, 1, 1, 1]],
+      "use": "75% inverse-sparse dot.",
+      "tags": ["dense", "noise"]
+    },
+    "hlines": {
+      "size": [1, 2],
+      "matrix": [[1], [0]],
+      "use": "Horizontal scanlines. CRT effect, retro shading.",
+      "tags": ["scanline", "retro"]
+    },
+    "vlines": {
+      "size": [2, 1],
+      "matrix": [[1, 0]],
+      "use": "Vertical lines. Wood grain, hair strands.",
+      "tags": ["lines", "grain"]
+    },
+    "diagonal_left": {
+      "size": [4, 4],
+      "matrix": [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]],
+      "use": "Diagonal hatching toward bottom-right. Slynyrd-style shading.",
+      "tags": ["hatch", "shading"]
+    },
+    "diagonal_right": {
+      "size": [4, 4],
+      "matrix": [[0, 0, 0, 1], [0, 0, 1, 0], [0, 1, 0, 0], [1, 0, 0, 0]],
+      "use": "Diagonal hatching toward bottom-left.",
+      "tags": ["hatch", "shading"]
+    },
+    "cross_hatch": {
+      "size": [4, 4],
+      "matrix": [[1, 0, 0, 1], [0, 1, 1, 0], [0, 1, 1, 0], [1, 0, 0, 1]],
+      "use": "Cross-hatch. Engraving feel, parchment shading.",
+      "tags": ["hatch", "engraving"]
+    },
+    "brick_offset": {
+      "size": [8, 4],
+      "matrix": [[1,1,1,1,1,1,1,0], [0,0,0,0,0,0,0,0], [1,1,1,0,1,1,1,1], [0,0,0,0,0,0,0,0]],
+      "use": "Brick mortar pattern, 8x4 tile. Use as texture overlay on wall fills.",
+      "tags": ["structure", "wall"]
+    },
+    "stipple_random_25": {
+      "size": [8, 8],
+      "matrix": [[0,0,0,1,0,0,0,0],[0,1,0,0,0,0,1,0],[0,0,0,0,0,1,0,0],[1,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0],[0,0,1,0,0,0,0,1],[0,0,0,0,0,0,0,0],[0,1,0,0,0,0,1,0]],
+      "use": "Pseudo-random 25% stipple, 8x8 tile. Organic noise without obvious repeat.",
+      "tags": ["noise", "organic"]
+    },
+    "stipple_random_50": {
+      "size": [8, 8],
+      "matrix": [[1,0,0,1,0,1,0,0],[0,1,1,0,1,0,1,1],[1,0,1,1,0,1,0,0],[0,1,0,0,1,0,1,1],[1,0,1,1,0,1,0,0],[0,1,0,0,1,0,1,1],[1,0,1,1,0,1,0,0],[0,1,0,0,1,0,1,1]],
+      "use": "Pseudo-random 50% stipple, 8x8 tile. Organic noise.",
+      "tags": ["noise", "organic"]
+    },
+    "wave_horizontal": {
+      "size": [8, 4],
+      "matrix": [[0,0,1,1,1,1,0,0],[0,1,0,0,0,0,1,0],[1,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0]],
+      "use": "Sine-like horizontal wave. Water surface, clouds.",
+      "tags": ["wave", "water"]
+    },
+    "scales": {
+      "size": [4, 4],
+      "matrix": [[0,1,1,0],[1,0,0,1],[0,1,1,0],[1,0,0,1]],
+      "use": "Fish scales / chainmail. Repeating hex-like cells.",
+      "tags": ["scales", "armor"]
+    }
+  }
+}

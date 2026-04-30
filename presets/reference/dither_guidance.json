@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "topic": "dither_guidance",
+  "description": "Decision tree and recipes for picking the right dither approach. Companion to presets/dither/{patterns,kernels}.json.",
+  "decision_tree": {
+    "q1": "Are you converting an external image (photo, AI gen) to a fixed palette?",
+    "q1_yes": "Use error-diffusion via quantize_image_to_palette. Recommend: atkinson for crispy pixel-art look, floyd_steinberg for general use.",
+    "q1_no_q2": "Are you painting by hand to suggest a gradient between 2 fixed colors?",
+    "q2_yes": "Use a binary pattern from patterns.json. Recommend: checker_2 for 50/50 mix, dots_25 / dots_75 for asymmetric.",
+    "q2_no_q3": "Are you trying to get retro low-res console feel?",
+    "q3_yes": "Use kernels.ordered.bayer_4x4 - the visible cross pattern IS the aesthetic.",
+    "q3_no_q4": "Are you doing artistic shading/hatching?",
+    "q4_yes": "Use patterns.diagonal_left, cross_hatch, or hand-paint clusters per pixel-art principles.",
+    "q4_no": "Probably you don't need dither. Add a 4th palette shade instead."
+  },
+  "common_recipes": {
+    "smooth_skin_gradient": {
+      "approach": "ordered.bayer_8x8 between two skin shades",
+      "tip": "Apply only at the gradient boundary, not the whole skin area",
+      "applies_at_size_min": 32
+    },
+    "AI_image_to_pixel_art": {
+      "approach": "atkinson kernel + 16-32 color palette",
+      "tip": "Run pyxelate first to downsample, THEN dither",
+      "command_chain": "pyxelate -> quantize_image_to_palette(dither=floyd_steinberg or external atkinson)"
+    },
+    "subtle_texture_overlay": {
+      "approach": "patterns.stipple_random_25 in a slightly-darker shade",
+      "tip": "Place on a separate layer at 30-50% opacity, then merge",
+      "good_for": ["stone_texture", "rust", "fabric"]
+    },
+    "scanline_crt_effect": {
+      "approach": "patterns.hlines as overlay layer, full opacity, dark color",
+      "tip": "Apply at end as post-process, not on individual sprite"
+    },
+    "engraving_grimoire": {
+      "approach": "patterns.cross_hatch in dark color over parchment base",
+      "tip": "Vary density: dense cross_hatch in deep shadow, single diagonal_left in mid-shadow",
+      "matches_palette": ["blessing", "lost-century", "rustic-gb"]
+    },
+    "water_animation": {
+      "approach": "patterns.wave_horizontal shifted +1px per frame, 4 frames",
+      "tip": "Combine with sparse highlights at wave crests"
+    },
+    "sky_gradient_at_low_res": {
+      "approach": "Manual hand-placed dither using checker_2 pattern, transitioning between 2 sky colors",
+      "tip": "Top 1/3: pure sky_top. Middle 1/3: checker_2. Bottom 1/3: pure sky_bottom."
+    }
+  },
+  "anti_patterns": {
+    "random_noise_dither": "DON'T use random pixel scatter - reads as static. Always either ordered or hand-clustered.",
+    "dither_for_low_color_count": "If you only have 4 palette colors, dither just hides the limit and looks muddy. Add a 5th color instead.",
+    "dither_at_8x8": "Sprites smaller than 16x16 don't have room for dither patterns. Use solid shades.",
+    "atkinson_for_smooth_gradient": "Atkinson loses 25% of error - it WILL show banding on smooth gradients. Use Floyd-Steinberg or Stucki for smooth needs.",
+    "dither_against_transparent": "Dither against alpha channel hardcodes the BG color. Always dither against the actual ship-time BG."
+  },
+  "kernel_comparison": {
+    "speed": ["sierra_lite (fastest)", "burkes", "floyd_steinberg", "atkinson", "stucki", "jjn (slowest)"],
+    "smoothness": ["jjn (smoothest)", "stucki", "floyd_steinberg", "burkes", "sierra_lite", "atkinson (crispiest)"],
+    "directional_bias": {
+      "floyd_steinberg": "diagonal (right-and-down)",
+      "burkes": "horizontal",
+      "stucki": "minimal",
+      "jjn": "minimal",
+      "atkinson": "diagonal",
+      "sierra_lite": "diagonal"
+    }
+  }
+}

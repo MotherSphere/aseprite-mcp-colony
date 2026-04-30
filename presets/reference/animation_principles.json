@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "topic": "animation_principles",
+  "description": "The 12 Disney principles of animation, translated to low-resolution pixel art constraints. Original principles from Thomas & Johnston 1981; pixel-art adaptations from Pedro Medeiros, Saint11, AdamCYounis.",
+  "principles": {
+    "squash_and_stretch": {
+      "concept": "Object deforms to suggest weight and rigidity. Heavy = less deform; light = more.",
+      "pixel_art_adaptation": "At 16-32px, deformation is per-pixel chunky: a ball squashing flattens 2-3px on impact, stretches 1px in flight. Conserve area (squash 1px wide = stretch 1px tall).",
+      "frames_min": 3,
+      "examples": ["bouncing_ball", "punch_impact", "landing_flat"]
+    },
+    "anticipation": {
+      "concept": "Wind-up before main action. Eye sees the wind-up and predicts the action.",
+      "pixel_art_adaptation": "1-2 frames of opposite-direction motion before action. E.g. attack: 1 frame leans BACK before swinging forward.",
+      "frames_min": 2,
+      "examples": ["jump_crouch", "punch_pull_back", "spell_gather"]
+    },
+    "staging": {
+      "concept": "Pose/composition reads in silhouette. The frame's intent is clear at a glance.",
+      "pixel_art_adaptation": "Test by squinting - does each frame read as a distinct pose? If frames blur together, redraw the silhouette with more difference.",
+      "tip": "Each key frame should be readable from across the room.",
+      "examples": ["clear_attack_silhouette", "distinct_walk_contact_pose"]
+    },
+    "straight_ahead_vs_pose_to_pose": {
+      "concept": "Two animation strategies. Straight-ahead = draw frame 1, then 2, then 3 sequentially. Pose-to-pose = draw key frames first, fill in-betweens.",
+      "pixel_art_adaptation": "ALWAYS pose-to-pose for pixel art. Define keys (contact, passing, contact for walk) then fill. Straight-ahead drifts off-model.",
+      "key_pose_count": "Walk: 4 keys. Attack: 3 keys (windup, contact, recover)."
+    },
+    "follow_through_overlapping_action": {
+      "concept": "Loose parts (cape, hair, weapon) continue after main body stops. Different parts move at different rates.",
+      "pixel_art_adaptation": "Add 1-2 frames of cape/hair settling AFTER the body has stopped. Animate cape on its own layer with 1-2 frame offset from body.",
+      "frames_added": "+1 to +3 frames after main stop",
+      "examples": ["cape_settling", "hair_swaying_after_stop"]
+    },
+    "slow_in_slow_out": {
+      "concept": "Most motion accelerates and decelerates - few things start/stop instantly.",
+      "pixel_art_adaptation": "Frame durations vary: longer at extremes, shorter in middle. E.g. attack swing: 120ms windup, 60ms swing, 120ms hold.",
+      "see_also": "presets/reference/easing_curves.json"
+    },
+    "arcs": {
+      "concept": "Real motion follows arcs, not straight lines. Hands swing in arcs, head bobs in arcs.",
+      "pixel_art_adaptation": "When animating a hand attack: middle frame should be HIGHER than end-points (arc up over). Walk cycle head: bobs up at passing pose, down at contact.",
+      "test": "Trace path of a feature (eye, hand, weapon tip) across all frames - should curve, not straight"
+    },
+    "secondary_action": {
+      "concept": "Secondary motions support main action without distracting.",
+      "pixel_art_adaptation": "Easy at 32+px (cape, breath). Hard at 16px (often have to skip). Pick ONE secondary at low res.",
+      "examples": ["breath_during_idle", "blink_during_walk", "weapon_glint_during_attack"]
+    },
+    "timing": {
+      "concept": "Frame count and duration define mood. Fast = energetic. Slow = heavy/dramatic.",
+      "pixel_art_adaptation": "Standard frame durations: 100ms = quick (run), 150ms = normal (walk), 200ms+ = heavy/idle.",
+      "weight_table": {
+        "sprite_running_60fps_feel": "60-80ms per frame",
+        "sprite_walking": "120-150ms per frame",
+        "idle_breath": "300-500ms per frame",
+        "boss_telegraph": "500-1000ms per frame (lets player see it coming)"
+      }
+    },
+    "exaggeration": {
+      "concept": "Push the action beyond reality for clarity at small sizes.",
+      "pixel_art_adaptation": "At 16-32px, subtle is invisible. Exaggerate windups (lean back FURTHER), squash MORE on impact, hair flap WIDER.",
+      "rule_of_thumb": "If a real-life motion is X, pixel-art version is 2X to 3X."
+    },
+    "solid_drawing": {
+      "concept": "Each frame feels like a solid 3D form, not a flat shape.",
+      "pixel_art_adaptation": "Maintain consistent shading direction (light source) across all frames. Don't redistribute shadow per frame randomly. Lock the light position.",
+      "common_mistake": "Drawing each frame fresh with different shadow placement -> object feels rubber"
+    },
+    "appeal": {
+      "concept": "Charisma / readability of design. The character should be interesting to look at.",
+      "pixel_art_adaptation": "Strong silhouette > internal detail. Squint test: can you tell character apart from others by silhouette alone?",
+      "checklist": ["Distinct silhouette", "Clear proportions", "Recognizable color blocks", "Readable face/eyes (even at 16px)"]
+    }
+  },
+  "pixel_art_specific_principles": {
+    "frame_economy": {
+      "rule": "Each frame must EARN its place. 4 great frames > 12 mushy frames. Cut frames that don't change silhouette meaningfully.",
+      "test": "If you delete a frame and the animation still reads, delete it."
+    },
+    "shape_keys_over_motion_keys": {
+      "rule": "Pixel art is shape animation, not motion animation. Each frame is a distinct REDRAWN shape, not an interpolated position.",
+      "implication": "Don't try to lerp between frames. Hand-craft each pose."
+    },
+    "hold_frames_at_extremes": {
+      "rule": "Extend duration of extreme poses (highest jump, deepest crouch). Eye lingers on extremes.",
+      "example": "Jump cycle: peak frame = 200ms, ascending frames = 80ms each."
+    },
+    "color_swap_for_states": {
+      "rule": "Use palette swap for state changes (hurt = red flash, frozen = blue tint) instead of redrawing pose.",
+      "implementation": "Same frames, different palette. Cheaper than new frames."
+    },
+    "1px_threshold": {
+      "rule": "If motion is sub-1-pixel, it doesn't exist. Either move 1px or move 0.",
+      "implication": "Slow motion can't slow infinitely - eventually you must just hold a frame."
+    }
+  },
+  "common_pitfalls": [
+    "Animating without anticipation -> action feels limp",
+    "Equal frame durations -> mechanical feel (use variable timing)",
+    "Light source shifting per frame -> sprite feels rubbery",
+    "No follow-through -> sprite feels stiff",
+    "Too many in-between frames at 16px -> visual mush",
+    "Idle that doesn't loop seamlessly -> visible 'pop' every cycle",
+    "Walk where head doesn't bob -> robotic gliding"
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "kind": "animation_cycles",
+  "description": "Canonical animation cycle definitions for sprites. Each cycle = ordered list of (frame_idx, duration_ms, key_pose). instantiate_animation_cycle(slug) creates frames with these durations and a tag covering them. Direction defaults to forward; cycles with anticipation/recovery can use ping-pong.",
+  "principles_reference": "See presets/reference/animation_principles.json for the 12 animation principles applied to pixel art (squash/stretch, anticipation, follow-through, etc).",
+  "cycles": {
+    "idle_breathe_2f": {
+      "name": "Idle breathe (2 frames)",
+      "description": "Minimal NES/GB-era idle. 2 frames alternating with 1px chest rise.",
+      "frame_count": 2,
+      "durations_ms": [500, 500],
+      "key_poses": ["chest_low", "chest_high_1px"],
+      "loop": "ping-pong-or-forward",
+      "tag_role": "idle",
+      "recommended_for": ["npc", "minor_enemy", "background_character"]
+    },
+    "idle_breathe_4f": {
+      "name": "Idle breathe (4 frames)",
+      "description": "Smoother SNES-era breath cycle.",
+      "frame_count": 4,
+      "durations_ms": [200, 200, 200, 200],
+      "key_poses": ["chest_low", "rising", "chest_high_1px", "falling"],
+      "loop": "forward",
+      "tag_role": "idle",
+      "recommended_for": ["hero", "important_npc"]
+    },
+    "idle_sway_4f": {
+      "name": "Idle sway (4 frames)",
+      "description": "Lateral 1px sway, weight-shift idle.",
+      "frame_count": 4,
+      "durations_ms": [250, 250, 250, 250],
+      "key_poses": ["lean_left_1px", "center", "lean_right_1px", "center"],
+      "loop": "forward",
+      "tag_role": "idle",
+      "recommended_for": ["alert_character", "guard"]
+    },
+    "idle_wait_8f": {
+      "name": "Idle wait (8 frames, slow)",
+      "description": "Long ambient idle: breath + occasional blink/glance.",
+      "frame_count": 8,
+      "durations_ms": [400, 400, 400, 400, 400, 400, 100, 400],
+      "key_poses": ["chest_low", "rising", "chest_high", "falling", "chest_low", "rising", "blink", "chest_high"],
+      "loop": "forward",
+      "tag_role": "idle",
+      "recommended_for": ["main_hero", "boss_idle"]
+    },
+    "walk_2f": {
+      "name": "Walk 2-frame (NES/early SNES)",
+      "description": "Minimal 2-step walk. Typical of FF1-3, Earthbound enemies.",
+      "frame_count": 2,
+      "durations_ms": [200, 200],
+      "key_poses": ["step_left", "step_right"],
+      "loop": "forward",
+      "tag_role": "walk",
+      "recommended_for": ["minor_enemy", "retro_hero"]
+    },
+    "walk_4f": {
+      "name": "Walk 4-frame (SNES JRPG standard)",
+      "description": "FF4-6 / Chrono Trigger walk. Pose-passing-pose-passing pattern.",
+      "frame_count": 4,
+      "durations_ms": [150, 150, 150, 150],
+      "key_poses": ["contact_left", "passing", "contact_right", "passing"],
+      "loop": "forward",
+      "tag_role": "walk",
+      "recommended_for": ["jrpg_hero", "npc"]
+    },
+    "walk_6f": {
+      "name": "Walk 6-frame",
+      "description": "Smoother walk with up/down body bob.",
+      "frame_count": 6,
+      "durations_ms": [120, 120, 120, 120, 120, 120],
+      "key_poses": ["contact_L", "down_L", "passing_L", "contact_R", "down_R", "passing_R"],
+      "loop": "forward",
+      "tag_role": "walk",
+      "recommended_for": ["polished_hero", "metroidvania"]
+    },
+    "walk_8f": {
+      "name": "Walk 8-frame (full anim)",
+      "description": "Full classical walk with anticipation per step.",
+      "frame_count": 8,
+      "durations_ms": [100, 100, 100, 100, 100, 100, 100, 100],
+      "key_poses": ["contact_L", "down_L", "passing_L", "high_L", "contact_R", "down_R", "passing_R", "high_R"],
+      "loop": "forward",
+      "tag_role": "walk",
+      "recommended_for": ["main_hero", "cinematic"]
+    },
+    "run_6f": {
+      "name": "Run 6-frame",
+      "description": "Fast 6-frame run with strong stretch on extension frames.",
+      "frame_count": 6,
+      "durations_ms": [80, 80, 80, 80, 80, 80],
+      "key_poses": ["push_L", "fly_L", "land_R", "push_R", "fly_R", "land_L"],
+      "loop": "forward",
+      "tag_role": "run",
+      "recommended_for": ["hero", "fast_enemy"]
+    },
+    "attack_swing_4f": {
+      "name": "Attack swing (4 frames, JRPG)",
+      "description": "Wind-up + swing + hold + recover. Standard JRPG attack.",
+      "frame_count": 4,
+      "durations_ms": [120, 80, 120, 200],
+      "key_poses": ["windup", "swing", "impact_hold", "recover"],
+      "loop": "once",
+      "tag_role": "attack",
+      "recommended_for": ["hero", "enemy_melee"]
+    },
+    "attack_swing_6f": {
+      "name": "Attack swing (6 frames, polished)",
+      "description": "Anticipation + swing + impact + follow-through + recover.",
+      "frame_count": 6,
+      "durations_ms": [120, 100, 60, 100, 120, 200],
+      "key_poses": ["anticipation", "swing_start", "swing_peak", "impact_flash", "follow_through", "recover"],
+      "loop": "once",
+      "tag_role": "attack",
+      "recommended_for": ["hero", "boss"]
+    },
+    "attack_thrust_3f": {
+      "name": "Attack thrust (3 frames, fast)",
+      "description": "Quick stab. Wind-up, thrust, recover.",
+      "frame_count": 3,
+      "durations_ms": [80, 60, 150],
+      "key_poses": ["windup", "thrust", "recover"],
+      "loop": "once",
+      "tag_role": "attack",
+      "recommended_for": ["dagger_hero", "fast_enemy"]
+    },
+    "cast_4f": {
+      "name": "Cast spell (4 frames)",
+      "description": "Magical channel: gather, raise, flash, release.",
+      "frame_count": 4,
+      "durations_ms": [200, 200, 100, 250],
+      "key_poses": ["gather", "raise_arms", "flash_peak", "release"],
+      "loop": "once",
+      "tag_role": "cast",
+      "recommended_for": ["mage", "boss"]
+    },
+    "cast_channel_6f": {
+      "name": "Cast channel (6 frames, looping)",
+      "description": "Continuous magical channel with pulsing aura. Loops while button held.",
+      "frame_count": 6,
+      "durations_ms": [120, 120, 120, 120, 120, 120],
+      "key_poses": ["gather_low", "rising", "peak_aura", "rising_2", "gather_low_2", "subtle_pulse"],
+      "loop": "ping-pong",
+      "tag_role": "channel",
+      "recommended_for": ["mage", "summoner"]
+    },
+    "hurt_2f": {
+      "name": "Hurt flinch (2 frames)",
+      "description": "Quick flinch, often shown with palette swap to red.",
+      "frame_count": 2,
+      "durations_ms": [80, 120],
+      "key_poses": ["impact", "recover"],
+      "loop": "once",
+      "tag_role": "hurt",
+      "recommended_for": ["all"]
+    },
+    "hurt_3f": {
+      "name": "Hurt knockback (3 frames)",
+      "description": "Flinch + slight backward lean + recover.",
+      "frame_count": 3,
+      "durations_ms": [80, 120, 150],
+      "key_poses": ["impact", "lean_back", "recover"],
+      "loop": "once",
+      "tag_role": "hurt",
+      "recommended_for": ["hero", "boss"]
+    },
+    "death_4f": {
+      "name": "Death (4 frames)",
+      "description": "Stagger, fall, slump, fade. Final frame stays.",
+      "frame_count": 4,
+      "durations_ms": [150, 200, 250, 800],
+      "key_poses": ["stagger", "knee", "slump", "still"],
+      "loop": "once_hold_last",
+      "tag_role": "death",
+      "recommended_for": ["enemy", "important_npc"]
+    },
+    "death_6f": {
+      "name": "Death dramatic (6 frames)",
+      "description": "Hero death with full collapse animation.",
+      "frame_count": 6,
+      "durations_ms": [150, 150, 200, 250, 300, 1000],
+      "key_poses": ["stagger", "lean_back", "knee", "fall", "slump", "still"],
+      "loop": "once_hold_last",
+      "tag_role": "death",
+      "recommended_for": ["hero", "boss"]
+    },
+    "dodge_3f": {
+      "name": "Dodge (3 frames)",
+      "description": "Quick sidestep / roll start. Pair with movement code.",
+      "frame_count": 3,
+      "durations_ms": [60, 80, 100],
+      "key_poses": ["dip", "dash", "land"],
+      "loop": "once",
+      "tag_role": "dodge",
+      "recommended_for": ["hero"]
+    },
+    "jump_5f": {
+      "name": "Jump full (5 frames)",
+      "description": "Anticipation, lift, peak, fall, land. Drives platformer or hop animation.",
+      "frame_count": 5,
+      "durations_ms": [100, 80, 200, 100, 100],
+      "key_poses": ["anticipation", "lift", "peak", "fall", "land"],
+      "loop": "once",
+      "tag_role": "jump",
+      "recommended_for": ["hero"]
+    },
+    "victory_4f": {
+      "name": "Victory pose (4 frames)",
+      "description": "Triumphant pose: raise + hold + small bounce.",
+      "frame_count": 4,
+      "durations_ms": [200, 600, 200, 200],
+      "key_poses": ["raise", "hold", "bounce_up", "settle"],
+      "loop": "once_hold_last",
+      "tag_role": "victory",
+      "recommended_for": ["hero"]
+    },
+    "talk_2f": {
+      "name": "Talk (2 frames, dialog)",
+      "description": "Mouth open / mouth closed for dialog. Loops while text printing.",
+      "frame_count": 2,
+      "durations_ms": [120, 120],
+      "key_poses": ["mouth_closed", "mouth_open"],
+      "loop": "forward",
+      "tag_role": "talk",
+      "recommended_for": ["npc", "portrait"]
+    },
+    "blink_3f": {
+      "name": "Blink (3 frames)",
+      "description": "Eye closing - closed - opening, fast. Triggered randomly during idle.",
+      "frame_count": 3,
+      "durations_ms": [60, 100, 60],
+      "key_poses": ["closing", "closed", "opening"],
+      "loop": "once",
+      "tag_role": "blink",
+      "recommended_for": ["portrait", "hero"]
+    },
+    "spawn_4f": {
+      "name": "Spawn appear (4 frames)",
+      "description": "Enemy materializes: faint, growing, formed, settled.",
+      "frame_count": 4,
+      "durations_ms": [80, 100, 120, 100],
+      "key_poses": ["fade_in", "forming", "almost", "settled"],
+      "loop": "once",
+      "tag_role": "spawn",
+      "recommended_for": ["enemy", "summoned"]
+    }
+  }
+}

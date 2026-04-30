@@ -1,0 +1,52 @@
+{
+  "slug": "roof_shingle",
+  "name": "Roof shingle",
+  "description": "Side-view roof shingles. 16x16 tile = 2 rows of 4 overlapping shingles (4x8 each).",
+  "rule_summary": "Each shingle = 4x8 rounded-bottom rectangle. Row 2 staggered by 2px horizontally. Row 1 covers top of row 2 (overlap). Bottom edge of each shingle gets shadow line.",
+  "source": "General medieval rooftop references",
+  "canvas": {"width": 16, "height": 16, "frames": 1},
+  "palette_tags_recommended": ["warm", "muted", "autumn"],
+  "color_hint_swatches": ["#7c3a25", "#4a2010", "#a05538", "#2a1408"],
+  "color_hint_roles": {
+    "#7c3a25": "shingle_base",
+    "#4a2010": "shingle_shadow",
+    "#a05538": "shingle_highlight",
+    "#2a1408": "seam"
+  },
+  "layers": [
+    {
+      "name": "GUIDE",
+      "visible": false,
+      "opacity": 128,
+      "purpose": "Shingle column boundaries.",
+      "pixels_color": "#ff00ff",
+      "pixels": [
+        [3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5], [3, 6], [3, 7],
+        [7, 0], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5], [7, 6], [7, 7],
+        [11, 0], [11, 1], [11, 2], [11, 3], [11, 4], [11, 5], [11, 6], [11, 7],
+        [1, 8], [1, 9], [1, 10], [1, 11], [1, 12], [1, 13], [1, 14], [1, 15],
+        [5, 8], [5, 9], [5, 10], [5, 11], [5, 12], [5, 13], [5, 14], [5, 15],
+        [9, 8], [9, 9], [9, 10], [9, 11], [9, 12], [9, 13], [9, 14], [9, 15],
+        [13, 8], [13, 9], [13, 10], [13, 11], [13, 12], [13, 13], [13, 14], [13, 15]
+      ]
+    },
+    {
+      "name": "shingles",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Shingle base color, per column."
+    },
+    {
+      "name": "shadow_band",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "1px shadow along bottom of each shingle."
+    },
+    {
+      "name": "highlight",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "1px highlight along top of each shingle."
+    }
+  ]
+}

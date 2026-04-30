@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "topic": "pixel_art_principles",
+  "description": "Core pixel-art rules distilled from Slynyrd Pixelblog, Saint11, Pedro Medeiros, AdamCYounis, and Daniel Linssen. Read this BEFORE drawing - it shortcuts most beginner mistakes.",
+  "principles": {
+    "hue_shift": {
+      "rule": "When shading from light to dark, do NOT just decrease lightness. Shift hue toward the cooler/darker neighbor (typically toward purple/blue) AND decrease saturation slightly in mid-tones. When highlighting, shift toward yellow/warm.",
+      "shift_directions": {
+        "shadow_from_red": "toward purple-red (hue -15 to -30 deg)",
+        "shadow_from_yellow": "toward orange or olive (hue -10 to -20)",
+        "shadow_from_green": "toward teal/blue-green (hue +20 to +40)",
+        "shadow_from_blue": "toward indigo/purple (hue +10 to +25)",
+        "highlight_from_red": "toward orange/yellow (hue +10 to +25)",
+        "highlight_from_blue": "toward cyan (hue -15 to -30)",
+        "highlight_from_green": "toward yellow-green (hue -10 to -20)"
+      },
+      "saturation_curve": "Mid-tones LEAST saturated. Highlights and shadows MORE saturated. NEVER pure gray in mid-tones for tinted objects.",
+      "lightness_steps": "3-5 steps for a ramp. Not equal spacing - usually compress mid-tones, expand extremes.",
+      "source": "Slynyrd Pixelblog #1; AdamCYounis Patreon - Color"
+    },
+    "jaggies": {
+      "rule": "Avoid 'jaggies' (stair-step aliasing where line direction changes abruptly). A diagonal line should keep consistent step length: 2-2-2-2 or 3-3-3-3, never 2-3-2-2-3.",
+      "fix_recipe": "If a line goes 2-2-3-2-2, the 3 is the jaggy. Either add a pixel to make it 3-3-3 or remove one to make it 2-2-2.",
+      "single_pixel_rule": "Single isolated pixels jutting out of a curve are ALWAYS wrong. Either continue the run or break to a clean step.",
+      "source": "Pedro Medeiros - Pixel Art Class; Saint11"
+    },
+    "banding": {
+      "rule": "Banding = parallel bands of two adjacent shades creating an unintentional stripe. Caused by placing each shade exactly along straight diagonals of equal length.",
+      "fix_recipe": "Vary the band thickness (3px - 2px - 4px - 2px), break with a 1px jut, or insert a 3rd shade to break the parallelism.",
+      "source": "Slynyrd Pixelblog #4"
+    },
+    "anti_aliasing_clusters": {
+      "rule": "Pixel-art AA uses small 'clusters' of intermediate-shade pixels at curve transitions. Cluster size = 1 to 3 pixels. NEVER use single AA pixels - they read as noise.",
+      "minimum_cluster": "2 pixels. A cluster of 1 looks like a mistake.",
+      "max_cluster_in_outline": "3 pixels. Beyond 3 you're just adding a new line shade, not AA.",
+      "AA_color_rule": "AA color = exact midpoint between the two colors being blended (use a real palette intermediate, not a different shade).",
+      "source": "Slynyrd Pixelblog #4; Saint11 - Anti-Aliasing"
+    },
+    "clustering_features": {
+      "rule": "Group small features (chips, scratches, weathering) instead of scattering them. The eye reads clusters as INTENTION; scatter reads as NOISE.",
+      "tile_advice": "For a 16x16 tile, 1-2 cluster zones rather than 8 scattered pixels.",
+      "source": "Slynyrd Pixelblog #45 - Tiles"
+    },
+    "edge_bevels": {
+      "rule": "Tiles with explicit edge bevels (lighter top-left, darker bottom-right) tile poorly because the bevel becomes visible at every grid intersection.",
+      "fix_options": [
+        "Skip edge bevel entirely; bevel only at object boundaries",
+        "Use 3-4 random rotation variants to break the grid",
+        "Move bevels INSIDE the tile (per-feature) rather than at the tile edge"
+      ],
+      "source": "Slynyrd Pixelblog #45"
+    },
+    "rule_of_thirds_per_tile": {
+      "rule": "Place key features (knot, chip, weathering) at rule-of-thirds points within a tile (1/3, 2/3 marks). Avoids mid-tile boredom and avoids the seam.",
+      "16x16_thirds": "approximately at x={5,10}, y={5,10}",
+      "source": "General composition rule applied to tiles"
+    },
+    "sub_pixel_animation": {
+      "rule": "For low-res sprites (16x16), motion under 1 pixel doesn't exist. Animate by SHIFTING the whole sprite or by REDESIGNING individual frames - don't try to interpolate sub-pixel.",
+      "implication": "Walk cycle = 4 distinct redesigned poses, not 4 lerp-interpolated frames.",
+      "source": "Pedro Medeiros - Pixel Art Animation"
+    },
+    "outline_styles": {
+      "selout": "Selective outline - vary outline darkness based on lit/shadowed sides. Lit side = mid-tone outline; shadow side = full-dark outline.",
+      "no_outline": "Skip outline entirely; rely on shape/silhouette and inner shading. Modern indie standard (Hyper Light Drifter style).",
+      "full_outline": "Solid 1px outline same color all around. Cartoon/retro look.",
+      "1bit": "Outline only, no fill. Game Boy / 1-bit aesthetic.",
+      "default_recommendation": "selout for characters at 16-32px; no_outline for 64+; full_outline for retro/cute."
+    },
+    "process_order": {
+      "rule": "For tiles: silhouette -> base color -> shadow -> highlight -> details/weathering -> AA. Never paint details first.",
+      "rule_for_chars": "thumbnail/silhouette -> outline -> base color -> shadow -> highlight -> rim light -> AA -> overlay (if any)."
+    },
+    "palette_constraints": {
+      "rule": "Constraint breeds creativity. Pick a palette and stick to it - no 'just one more color' for the special FX.",
+      "minimum_per_object": "3 shades minimum for shape readability (base + shadow + highlight)",
+      "comfort_zone": "16 colors is enough for a full game. 32 is luxury. 64+ requires discipline to avoid mush."
+    },
+    "lighting_direction": {
+      "rule": "Pick ONE light direction for the whole scene and respect it. Default: top-left (NW), 45 degrees down. Light hits NW edges, shadow falls to SE.",
+      "exception": "Rim light from opposite direction allowed (1-2 px) for separation against dark backgrounds.",
+      "source": "Slynyrd Pixelblog #5 - Lighting"
+    }
+  },
+  "quick_fix_checklist": [
+    "Any single jutting pixel? Continue the run or remove it.",
+    "Any AA cluster of size 1? Grow to 2 or remove.",
+    "Banding visible? Vary thickness or insert a 3rd shade.",
+    "Mid-tones desaturated enough? If they look muddy, they're not.",
+    "Light direction consistent across the asset?",
+    "Features clustered or scattered? Cluster wins.",
+    "Tile edges seam-free at 4-tile preview?"
+  ],
+  "common_mistakes": {
+    "uniform_outline": "Outline same darkness all around -> object looks flat. Use selout.",
+    "pure_black_shadow": "Pure #000000 reads as a hole. Use a deeply-saturated dark hue from the palette instead.",
+    "noise_dither": "Random scatter dither for shading -> reads as static. Use ordered patterns or hand-clustered AA.",
+    "anti_alias_to_background": "AA-ing to a transparent background hardcodes the BG color. Always AA on the BG color you'll actually ship; better yet, skip AA on the silhouette."
+  }
+}

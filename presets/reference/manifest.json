@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "category": "reference",
+  "description": "Knowledge base for pixel-art creative work. Each topic is a structured JSON document the MCP can serve via get_reference(topic) and Claude can consume to make better art decisions.",
+  "topics": [
+    {
+      "slug": "pixel_art_principles",
+      "name": "Pixel art principles",
+      "description": "Hue shift, jaggies, banding, AA clusters, edge bevels, process order. Slynyrd + Saint11 + Pedro Medeiros distilled.",
+      "file": "pixel_art_principles.json"
+    },
+    {
+      "slug": "sprite_size_conventions",
+      "name": "Sprite size conventions",
+      "description": "Tile / character / portrait / UI sizes per era and genre. Project VN specific recommendations.",
+      "file": "sprite_size_conventions.json"
+    },
+    {
+      "slug": "color_theory",
+      "name": "Color theory",
+      "description": "Harmonies (complementary, analogous, triadic, etc), hue shift table, temperature, narrative color associations.",
+      "file": "color_theory.json"
+    },
+    {
+      "slug": "easing_curves",
+      "name": "Easing curves (Penner)",
+      "description": "25 standard easing functions with formulas, feel descriptions, use cases, pixel-art minimum frame counts.",
+      "file": "easing_curves.json"
+    },
+    {
+      "slug": "dither_guidance",
+      "name": "Dither guidance",
+      "description": "Decision tree for picking the right dither approach. Common recipes (skin gradient, AI image conversion, scanlines, water).",
+      "file": "dither_guidance.json"
+    },
+    {
+      "slug": "animation_principles",
+      "name": "Animation principles",
+      "description": "12 Disney principles adapted for low-res pixel art. Frame economy, shape keys, hold frames, palette swap states.",
+      "file": "animation_principles.json"
+    }
+  ]
+}

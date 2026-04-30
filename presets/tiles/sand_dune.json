@@ -1,0 +1,48 @@
+{
+  "slug": "sand_dune",
+  "name": "Sand dune",
+  "description": "Top-down sand. 16x16 base with subtle ripple lines and grain speckles.",
+  "rule_summary": "Base sand, then 2-3 broken horizontal ripple lines (slightly wavy), plus subtle grain speckles. Almost monochromatic (only 3 close shades).",
+  "source": "Saint11 + classic JRPG desert tiles",
+  "canvas": {"width": 16, "height": 16, "frames": 1},
+  "palette_tags_recommended": ["warm", "muted", "desert", "sunset"],
+  "color_hint_swatches": ["#d4b888", "#b09868", "#e8d4a4", "#a08858"],
+  "color_hint_roles": {
+    "#d4b888": "sand_base",
+    "#b09868": "sand_shadow",
+    "#e8d4a4": "sand_highlight",
+    "#a08858": "sand_grain"
+  },
+  "layers": [
+    {
+      "name": "GUIDE",
+      "visible": false,
+      "opacity": 128,
+      "purpose": "Suggested ripple lines (rule of thirds vertically).",
+      "pixels_color": "#ff00ff",
+      "pixels": [
+        [0, 5], [1, 5], [2, 4], [3, 4], [4, 4], [5, 5], [6, 5], [7, 5], [8, 4], [9, 4], [10, 5], [11, 5], [12, 4], [13, 4], [14, 5], [15, 5],
+        [0, 11], [1, 10], [2, 10], [3, 11], [4, 11], [5, 10], [6, 10], [7, 11], [8, 11], [9, 11], [10, 10], [11, 10], [12, 11], [13, 11], [14, 10], [15, 10]
+      ]
+    },
+    {
+      "name": "sand",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Base sand fill (full 16x16).",
+      "fill_all": "#d4b888"
+    },
+    {
+      "name": "ripples",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Wavy darker lines, broken into 3-5 segments each."
+    },
+    {
+      "name": "grain",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Sparse 1px speckles, both lighter and darker."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "slug": "stone_wall_block",
+  "name": "Stone wall block (8-2)",
+  "description": "Large mortared wall blocks. 16x16 tile = 2 blocks of 8x16 separated by 2px vertical mortar at center, with horizontal mortar every 8px.",
+  "rule_summary": "Vertical mortar at x=7-8 (2px wide). Horizontal mortar at y=7 (full width). Each block = 7x7 stone face. Stagger horizontal mortar between rows by NOT including the seam at y=15 (let next tile handle it).",
+  "source": "Slynyrd Pixelblog #45 + general castle wall references",
+  "canvas": {"width": 16, "height": 16, "frames": 1},
+  "palette_tags_recommended": ["dark-fantasy", "moody", "muted"],
+  "color_hint_swatches": ["#5a534a", "#2a2520", "#7a7060", "#3a3530"],
+  "color_hint_roles": {
+    "#5a534a": "stone_base",
+    "#2a2520": "mortar",
+    "#7a7060": "highlight",
+    "#3a3530": "shadow"
+  },
+  "layers": [
+    {
+      "name": "GUIDE",
+      "visible": false,
+      "opacity": 128,
+      "purpose": "Mortar grid: 2px vertical at x=7-8, 1px horizontal at y=7.",
+      "pixels_color": "#ff00ff",
+      "pixels": [
+        [7, 0], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5], [7, 6], [7, 7], [7, 8], [7, 9], [7, 10], [7, 11], [7, 12], [7, 13], [7, 14], [7, 15],
+        [8, 0], [8, 1], [8, 2], [8, 3], [8, 4], [8, 5], [8, 6], [8, 7], [8, 8], [8, 9], [8, 10], [8, 11], [8, 12], [8, 13], [8, 14], [8, 15],
+        [0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [9, 7], [10, 7], [11, 7], [12, 7], [13, 7], [14, 7], [15, 7]
+      ]
+    },
+    {
+      "name": "MORTAR",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Mortar pre-fill.",
+      "pixels_color": "#2a2520",
+      "pixels_from_guide": true
+    },
+    {
+      "name": "stone",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Stone face per block."
+    },
+    {
+      "name": "highlight",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "NW edge highlight per block."
+    },
+    {
+      "name": "weathering",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Cracks, moss. 1-2 features per block."
+    }
+  ]
+}

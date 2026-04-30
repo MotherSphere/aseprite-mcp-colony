@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "category": "animation",
+  "description": "Canonical animation cycle definitions. Use apply_animation_preset(slug, target_aseprite) to add frames + tag + durations to an existing sprite, OR instantiate_animation_preset(slug, dest, w, h) to create a fresh sprite with the cycle pre-populated.",
+  "files": {
+    "cycles": "cycles.json"
+  },
+  "entries": [
+    {"slug": "idle_breathe_2f", "name": "Idle breathe 2f", "frames": 2, "tags": ["idle", "minimal", "retro"], "file": "cycles.json"},
+    {"slug": "idle_breathe_4f", "name": "Idle breathe 4f", "frames": 4, "tags": ["idle", "smooth"], "file": "cycles.json"},
+    {"slug": "idle_sway_4f", "name": "Idle sway 4f", "frames": 4, "tags": ["idle", "alert"], "file": "cycles.json"},
+    {"slug": "idle_wait_8f", "name": "Idle wait 8f", "frames": 8, "tags": ["idle", "long", "ambient"], "file": "cycles.json"},
+    {"slug": "walk_2f", "name": "Walk 2f", "frames": 2, "tags": ["walk", "retro", "nes"], "file": "cycles.json"},
+    {"slug": "walk_4f", "name": "Walk 4f", "frames": 4, "tags": ["walk", "snes", "jrpg"], "file": "cycles.json"},
+    {"slug": "walk_6f", "name": "Walk 6f", "frames": 6, "tags": ["walk", "smooth"], "file": "cycles.json"},
+    {"slug": "walk_8f", "name": "Walk 8f", "frames": 8, "tags": ["walk", "polished", "cinematic"], "file": "cycles.json"},
+    {"slug": "run_6f", "name": "Run 6f", "frames": 6, "tags": ["run", "fast"], "file": "cycles.json"},
+    {"slug": "attack_swing_4f", "name": "Attack swing 4f", "frames": 4, "tags": ["attack", "melee", "jrpg"], "file": "cycles.json"},
+    {"slug": "attack_swing_6f", "name": "Attack swing 6f", "frames": 6, "tags": ["attack", "melee", "polished"], "file": "cycles.json"},
+    {"slug": "attack_thrust_3f", "name": "Attack thrust 3f", "frames": 3, "tags": ["attack", "stab", "fast"], "file": "cycles.json"},
+    {"slug": "cast_4f", "name": "Cast spell 4f", "frames": 4, "tags": ["cast", "magic"], "file": "cycles.json"},
+    {"slug": "cast_channel_6f", "name": "Cast channel 6f loop", "frames": 6, "tags": ["cast", "magic", "loop"], "file": "cycles.json"},
+    {"slug": "hurt_2f", "name": "Hurt flinch 2f", "frames": 2, "tags": ["hurt", "flinch"], "file": "cycles.json"},
+    {"slug": "hurt_3f", "name": "Hurt knockback 3f", "frames": 3, "tags": ["hurt", "knockback"], "file": "cycles.json"},
+    {"slug": "death_4f", "name": "Death 4f", "frames": 4, "tags": ["death", "enemy"], "file": "cycles.json"},
+    {"slug": "death_6f", "name": "Death dramatic 6f", "frames": 6, "tags": ["death", "hero", "boss"], "file": "cycles.json"},
+    {"slug": "dodge_3f", "name": "Dodge 3f", "frames": 3, "tags": ["dodge", "evasion"], "file": "cycles.json"},
+    {"slug": "jump_5f", "name": "Jump full 5f", "frames": 5, "tags": ["jump", "platformer"], "file": "cycles.json"},
+    {"slug": "victory_4f", "name": "Victory pose 4f", "frames": 4, "tags": ["victory", "celebrate"], "file": "cycles.json"},
+    {"slug": "talk_2f", "name": "Talk 2f", "frames": 2, "tags": ["talk", "dialog", "portrait"], "file": "cycles.json"},
+    {"slug": "blink_3f", "name": "Blink 3f", "frames": 3, "tags": ["blink", "portrait"], "file": "cycles.json"},
+    {"slug": "spawn_4f", "name": "Spawn appear 4f", "frames": 4, "tags": ["spawn", "summoned"], "file": "cycles.json"}
+  ],
+  "curated_sets": {
+    "hero_complete": ["idle_wait_8f", "walk_8f", "run_6f", "attack_swing_6f", "cast_4f", "hurt_3f", "death_6f", "dodge_3f", "jump_5f", "victory_4f"],
+    "minor_enemy": ["idle_breathe_2f", "walk_2f", "attack_swing_4f", "hurt_2f", "death_4f"],
+    "boss": ["idle_wait_8f", "walk_4f", "attack_swing_6f", "cast_channel_6f", "hurt_3f", "death_6f", "spawn_4f"],
+    "npc_dialog": ["idle_breathe_4f", "talk_2f", "blink_3f"],
+    "jrpg_classic": ["idle_breathe_2f", "walk_4f", "attack_swing_4f", "cast_4f", "hurt_2f", "death_4f", "victory_4f"]
+  }
+}

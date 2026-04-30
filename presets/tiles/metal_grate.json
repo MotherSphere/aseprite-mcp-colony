@@ -1,0 +1,56 @@
+{
+  "slug": "metal_grate",
+  "name": "Metal grate (sci-fi)",
+  "description": "Industrial metal floor grate. 16x16 with cross-bar pattern and rivets.",
+  "rule_summary": "Cross bars at x=4,12 and y=4,12 forming 4 cells. Rivets (2x2) at corners (0,0), (15,0), (0,15), (15,15) approximately. Diagonal scratches optional.",
+  "source": "Spelunky/Risk of Rain industrial tiles",
+  "canvas": {"width": 16, "height": 16, "frames": 1},
+  "palette_tags_recommended": ["cool", "sci-fi", "muted"],
+  "color_hint_swatches": ["#4a4a52", "#28282e", "#6a6a72", "#10101a"],
+  "color_hint_roles": {
+    "#4a4a52": "metal_base",
+    "#28282e": "metal_shadow",
+    "#6a6a72": "metal_highlight",
+    "#10101a": "void"
+  },
+  "layers": [
+    {
+      "name": "GUIDE",
+      "visible": false,
+      "opacity": 128,
+      "purpose": "Cross-bar centerlines.",
+      "pixels_color": "#ff00ff",
+      "pixels": [
+        [4, 0], [4, 1], [4, 2], [4, 3], [4, 4], [4, 5], [4, 6], [4, 7], [4, 8], [4, 9], [4, 10], [4, 11], [4, 12], [4, 13], [4, 14], [4, 15],
+        [12, 0], [12, 1], [12, 2], [12, 3], [12, 4], [12, 5], [12, 6], [12, 7], [12, 8], [12, 9], [12, 10], [12, 11], [12, 12], [12, 13], [12, 14], [12, 15],
+        [0, 4], [1, 4], [2, 4], [3, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [11, 4], [13, 4], [14, 4], [15, 4],
+        [0, 12], [1, 12], [2, 12], [3, 12], [5, 12], [6, 12], [7, 12], [8, 12], [9, 12], [10, 12], [11, 12], [13, 12], [14, 12], [15, 12]
+      ]
+    },
+    {
+      "name": "void",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Pre-fill voids (the 4 cells under the grate).",
+      "fill_all": "#10101a"
+    },
+    {
+      "name": "bars",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Metal cross-bars at guide rows/cols (3px wide each)."
+    },
+    {
+      "name": "rivets",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "4 rivets at intersections (1-2px each)."
+    },
+    {
+      "name": "highlight",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Top-left edge of bars (1px lighter)."
+    }
+  ]
+}

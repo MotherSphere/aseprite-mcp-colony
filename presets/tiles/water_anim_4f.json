@@ -1,0 +1,40 @@
+{
+  "slug": "water_anim_4f",
+  "name": "Water animated 4f",
+  "description": "Looping 4-frame water tile, 16x16. Frames cycle horizontally-shifting wave pattern.",
+  "rule_summary": "Each frame shifts the wave pattern by 4px. Use 2 shades of water + 1 highlight. Frame durations 200ms each = 800ms loop.",
+  "source": "Slynyrd Pixelblog #2 - Water + general arcade water tiles",
+  "canvas": {"width": 16, "height": 16, "frames": 4, "frame_duration_ms": 200},
+  "palette_tags_recommended": ["cool", "ocean", "moody"],
+  "color_hint_swatches": ["#2a4d6b", "#1a3045", "#4a7090", "#8ab0c8"],
+  "color_hint_roles": {
+    "#2a4d6b": "water_base",
+    "#1a3045": "water_shadow",
+    "#4a7090": "water_mid",
+    "#8ab0c8": "water_highlight"
+  },
+  "layers": [
+    {
+      "name": "water_base",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Full 16x16 base water color across all 4 frames.",
+      "fill_all_frames": "#2a4d6b"
+    },
+    {
+      "name": "wave",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Wave pattern. Paint frame 1 then shift +4px x for frames 2/3/4."
+    },
+    {
+      "name": "highlight",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Sparse 1px highlights on wave crests, shifting with wave."
+    }
+  ],
+  "tags_animation": [
+    {"name": "loop", "from": 1, "to": 4, "direction": "forward"}
+  ]
+}

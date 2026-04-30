@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "category": "tiles",
+  "description": "Tile structure templates. Each template is a JSON definition (canvas size, layers, guide pixels, palette hints) used by instantiate_tile_template to create a fresh .aseprite skeleton ready to paint. Templates pre-paint mortar/seams and add a hidden GUIDE layer with the structural rule.",
+  "instantiation_contract": "instantiate_tile_template(slug, dest_path) reads the template's .json, calls create_canvas, then for each layer: creates layer, paints fill_all/pixels (using pixels_color or pixels_from_guide=true to reuse GUIDE positions), sets visibility/opacity. Frames > 1 trigger add_frame loop and frame_duration_ms. tags_animation creates Aseprite tags.",
+  "entries": [
+    {
+      "slug": "brick_7-1",
+      "name": "Brick 7-1 (Slynyrd)",
+      "tile_size": [16, 16],
+      "tags": ["floor", "wall", "stone", "dark-fantasy", "dungeon", "slynyrd"],
+      "description": "16x16 4-stone brick floor with 1px mortar. Slynyrd #45 canonical structure.",
+      "file": "brick_7-1.json"
+    },
+    {
+      "slug": "cobble_irregular",
+      "name": "Cobble irregular",
+      "tile_size": [16, 16],
+      "tags": ["floor", "stone", "dark-fantasy", "dungeon", "varied"],
+      "description": "Polygonal cobblestones of mixed sizes, mortar painted negatively.",
+      "file": "cobble_irregular.json"
+    },
+    {
+      "slug": "stone_wall_block",
+      "name": "Stone wall block (8-2)",
+      "tile_size": [16, 16],
+      "tags": ["wall", "stone", "dark-fantasy", "castle"],
+      "description": "Large mortared blocks for castle walls, 2 blocks per tile.",
+      "file": "stone_wall_block.json"
+    },
+    {
+      "slug": "plank_horizontal",
+      "name": "Plank horizontal (14-2)",
+      "tile_size": [16, 16],
+      "tags": ["floor", "wood", "warm", "rustic"],
+      "description": "Horizontal wood plank with grain and knot.",
+      "file": "plank_horizontal.json"
+    },
+    {
+      "slug": "grass_blob",
+      "name": "Grass blob",
+      "tile_size": [16, 16],
+      "tags": ["floor", "grass", "forest", "outdoor"],
+      "description": "Top-down grass with organic blob distribution.",
+      "file": "grass_blob.json"
+    },
+    {
+      "slug": "dirt_speckle",
+      "name": "Dirt speckle",
+      "tile_size": [16, 16],
+      "tags": ["floor", "ground", "outdoor", "warm"],
+      "description": "Top-down dirt with speckles and pebbles.",
+      "file": "dirt_speckle.json"
+    },
+    {
+      "slug": "sand_dune",
+      "name": "Sand dune",
+      "tile_size": [16, 16],
+      "tags": ["floor", "sand", "desert", "warm"],
+      "description": "Top-down sand with subtle ripples.",
+      "file": "sand_dune.json"
+    },
+    {
+      "slug": "ice_block",
+      "name": "Ice block",
+      "tile_size": [16, 16],
+      "tags": ["floor", "ice", "cool", "magical"],
+      "description": "Pale ice with crystalline cracks.",
+      "file": "ice_block.json"
+    },
+    {
+      "slug": "roof_shingle",
+      "name": "Roof shingle",
+      "tile_size": [16, 16],
+      "tags": ["roof", "wood", "warm", "rustic"],
+      "description": "Side-view overlapping shingles.",
+      "file": "roof_shingle.json"
+    },
+    {
+      "slug": "metal_grate",
+      "name": "Metal grate (sci-fi)",
+      "tile_size": [16, 16],
+      "tags": ["floor", "metal", "sci-fi", "industrial"],
+      "description": "Industrial metal grate with cross-bars and rivets.",
+      "file": "metal_grate.json"
+    },
+    {
+      "slug": "water_anim_4f",
+      "name": "Water animated 4f",
+      "tile_size": [16, 16],
+      "frames": 4,
+      "tags": ["floor", "water", "animated", "cool"],
+      "description": "4-frame looping water with shifting waves.",
+      "file": "water_anim_4f.json"
+    },
+    {
+      "slug": "lava_anim_4f",
+      "name": "Lava animated 4f",
+      "tile_size": [16, 16],
+      "frames": 4,
+      "tags": ["floor", "lava", "animated", "warm", "horror"],
+      "description": "4-frame looping lava with pulsing cracks.",
+      "file": "lava_anim_4f.json"
+    }
+  ]
+}

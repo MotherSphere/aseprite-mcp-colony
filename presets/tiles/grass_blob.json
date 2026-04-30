@@ -1,0 +1,45 @@
+{
+  "slug": "grass_blob",
+  "name": "Grass blob",
+  "description": "Top-down grass tile. 16x16 base ground + 3-5 grass blobs of 2-4px scattered organically.",
+  "rule_summary": "Base ground fill, then 4 grass blobs of varied size (2x2, 3x2, 2x3, 4x3) at non-aligned positions. Avoid grid - jitter the centers. Add micro-highlight (1px) on top of each blob.",
+  "source": "Slynyrd Pixelblog #11 - Grass Tiles",
+  "canvas": {"width": 16, "height": 16, "frames": 1},
+  "palette_tags_recommended": ["forest", "moody", "muted"],
+  "color_hint_swatches": ["#3e6021", "#2a4015", "#5a8030", "#1f2f10"],
+  "color_hint_roles": {
+    "#3e6021": "ground_base",
+    "#2a4015": "ground_shadow",
+    "#5a8030": "blob_highlight",
+    "#1f2f10": "blob_shadow"
+  },
+  "layers": [
+    {
+      "name": "GUIDE",
+      "visible": false,
+      "opacity": 128,
+      "purpose": "Suggested blob centers (avoid axis alignment).",
+      "pixels_color": "#ff00ff",
+      "pixels": [[3, 4], [10, 6], [5, 11], [12, 13], [8, 2]]
+    },
+    {
+      "name": "ground",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Base ground fill (full 16x16).",
+      "fill_all": "#3e6021"
+    },
+    {
+      "name": "blobs",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Grass tufts. Cluster around guide centers, varied sizes."
+    },
+    {
+      "name": "highlight",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "1px top-of-blob highlights."
+    }
+  ]
+}

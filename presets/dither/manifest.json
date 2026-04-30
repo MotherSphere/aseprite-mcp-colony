@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "category": "dither",
+  "description": "Two complementary dither catalogs: hand-painted patterns (binary tiles you stencil into a sprite) and perceptual kernels (Bayer + error-diffusion for image quantization).",
+  "files": {
+    "patterns": "patterns.json",
+    "kernels": "kernels.json"
+  },
+  "entries": [
+    {"slug": "patterns", "name": "Binary tile patterns", "kind": "binary_patterns", "description": "Hand-painted pixel-art dither tiles. 14 patterns including checker, diagonal hatch, brick offset, scales, stipple, waves.", "file": "patterns.json"},
+    {"slug": "kernels", "name": "Perceptual dither kernels", "kind": "ordered_and_error_diffusion", "description": "Bayer 2x2/4x4/8x8/16x16 ordered + Floyd-Steinberg, JJN, Stucki, Burkes, Sierra-Lite, Atkinson error-diffusion kernels.", "file": "kernels.json"}
+  ],
+  "guidance_quick": {
+    "want_visible_pattern": "Use kernels.ordered.bayer_4x4 or hand-paint a patterns.checker_2.",
+    "want_invisible_dither": "Use kernels.error_diffusion.atkinson or floyd_steinberg.",
+    "want_pixel_art_crisp": "kernels.error_diffusion.atkinson preserves blacks/whites, classic pixel-art look.",
+    "want_smooth_gradient_at_low_res": "kernels.ordered.bayer_8x8.",
+    "want_artistic_shading": "patterns.diagonal_left or patterns.cross_hatch placed by hand."
+  }
+}

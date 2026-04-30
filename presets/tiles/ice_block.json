@@ -1,0 +1,48 @@
+{
+  "slug": "ice_block",
+  "name": "Ice block",
+  "description": "Top-down ice tile. 16x16 base with crystalline cracks and bright highlight.",
+  "rule_summary": "Pale blue base, 2-3 jagged crack lines (45 deg + horizontal), 1-2 small bright spots. Keep contrast low - ice should feel translucent.",
+  "source": "Classic JRPG ice + general crystal references",
+  "canvas": {"width": 16, "height": 16, "frames": 1},
+  "palette_tags_recommended": ["cool", "ice", "pastel"],
+  "color_hint_swatches": ["#a4c8d8", "#7090a8", "#d4e0e8", "#5a7888"],
+  "color_hint_roles": {
+    "#a4c8d8": "ice_base",
+    "#7090a8": "ice_shadow",
+    "#d4e0e8": "ice_highlight",
+    "#5a7888": "crack"
+  },
+  "layers": [
+    {
+      "name": "GUIDE",
+      "visible": false,
+      "opacity": 128,
+      "purpose": "Crack guide: 2 jagged lines.",
+      "pixels_color": "#ff00ff",
+      "pixels": [
+        [3, 2], [4, 3], [5, 4], [6, 4], [7, 5], [8, 6], [9, 6], [10, 7], [11, 8],
+        [2, 12], [3, 11], [4, 11], [5, 10], [6, 10], [7, 11], [8, 12], [9, 12], [10, 13]
+      ]
+    },
+    {
+      "name": "ice",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Base ice fill (full 16x16).",
+      "fill_all": "#a4c8d8"
+    },
+    {
+      "name": "cracks",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "Jagged darker crack lines."
+    },
+    {
+      "name": "highlights",
+      "visible": true,
+      "opacity": 255,
+      "purpose": "1-2 bright spots near crack intersections."
+    }
+  ]
+}
